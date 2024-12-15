@@ -27,32 +27,28 @@ header h1{
     white-space: pre-line;
 }
 
-    /* Tamaño de fuente base para móviles */
-    .custom-text {
+.custom-text {
         font-size: 1rem;
     }
 
-    /* Aumentar el tamaño de la fuente para pantallas medianas (tablets y arriba) */
-    @media (min-width: 768px) {
-        .custom-text {
-            font-size: 1.25rem !important;
-        }
+    /*Celular*/
+@media (min-width: 768px) {
+    .custom-text {
+        font-size: 1.25rem !important;
     }
+}
 
-    /* Aumentar aún más el tamaño de la fuente para pantallas grandes */
-    @media (min-width: 992px) {
-        .custom-text {
-            font-size: 1.5rem !important;
-        }
+@media (min-width: 992px) {
+    .custom-text {
+        font-size: 1.5rem !important;
     }
+}
 
-    /* Pantallas extra grandes */
-    @media (min-width: 1200px) {
-        .custom-text {
-            font-size: 2rem !important;
-        }
+@media (min-width: 1200px) {
+    .custom-text {
+        font-size: 2rem !important;
     }
-
+}
 /*Por terminar*/
 #box1{
     display: flex;
@@ -60,4 +56,14 @@ header h1{
 
 #box2{
     display: flex;
+}
+
+#section-footer{
+    display: flex;
+    justify-content: space-between;
+    white-space: pre-line;
+}
+
+#salmon-image{
+
 }
