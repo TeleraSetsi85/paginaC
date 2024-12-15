@@ -18,6 +18,10 @@ header h1{
     align-items: center;
 }
 
+#salmon-logo{
+    width: 50px;
+}
+
 #title-header{
     font-style: italic; /*Luego checar otra fuente*/
     color: salmon;
@@ -65,5 +69,5 @@ header h1{
 }
 
 #salmon-image{
-    display: block; /*Por terminar*/
+    width: 300px;
 }
