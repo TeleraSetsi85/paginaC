@@ -49,7 +49,7 @@
     <main>
             <div id="box2">
                 <!--Checa si la palabra grandesa, es grandesa-->
-                <h3 style="white-space: pre-line;">
+                <h3 class="pharagraph">
                     Descubre la grandeza 
                     con la cual descubrirás, tu proposito,
                     juntos, transformaremos tu vida
@@ -59,7 +59,7 @@
             </div>
 
             <div id="box2">
-                <h3 style="white-space: pre-line;">
+                <h3 class="pharagraph">
                     Vive una vida mas plena
                     y satisfactoria
                     ¡Contactame para emprender este viaje juntos!
@@ -69,62 +69,98 @@
             <img src="" alt="photo">
     </main>
     <!--Seccion de quien es lexo salmon-->
-    <section>
-        <h1>¿Quien es Lexo Salmon</h1>
-        <div>
-            <!--La imagen va a un lado izq del texto y el texto a la derecha-->
-            <img src="/paginaC/img/photo 2.jpg" class="img-fluid" alt="photo"> <!--Has un carrusel de fotos-->
-            <p class="pharagraph">
-                Instructor personal motivacional y Orador.
-                He recorrido un camino lleno de retos que me han llevado a crecer tanto en lo personal como en lo espiritual.
-                Gracias a herramientas como la filosofia estoica, la sanación espiritual y el trabajo introspectivo,
-                he logrado transformar obstaculos en oportunidades
-                y alcanzar metas que parecian inalcanzables.
-            </p>
-            <p class="pharagraph">
-                Quiero ser tu guia para descubrir el enorme potencial
-                Que habita en ti.
-                Juntos trabajaremos para que identifiques tu proposito, enfrentes tus temores y construyas
-                una vida plena y con significado.
-            </p>
+    <section class="container mt-5">
+        <h1>¿Quién es Lexo Salmon?</h1>
+        <div class="row align-items-center">
+            <!-- Columna de la imagen -->
+            <div class="col-md-4">
+                <!-- Aquí puedes colocar un carrusel -->
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/img/photo 2.jpg" class="d-block w-100 img-fluid" alt="photo 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/img/photo 3.jpg" class="d-block w-100 img-fluid" alt="photo 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/img/photo 4.jpg" class="d-block w-100 img-fluid" alt="photo 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/img/photo 5.jpg" class="d-block w-100 img-fluid" alt="photo 4">
+                        </div>
+                    </div>
+                    <!-- Botones del carrusel -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Columna del texto -->
+            <div class="col-md-8">
+                <p class="custom-text">
+                    Instructor personal motivacional y Orador. He recorrido un camino lleno de retos que me han llevado a crecer tanto en lo personal como en lo espiritual.
+                    Gracias a herramientas como la filosofía estoica, la sanación espiritual y el trabajo introspectivo, he logrado transformar obstáculos en oportunidades
+                    y alcanzar metas que parecían inalcanzables.
+                </p>
+                <p class="custom-text">
+                    Quiero ser tu guía para descubrir el enorme potencial que habita en ti. Juntos trabajaremos para que identifiques tu propósito, enfrentes tus temores y construyas
+                    una vida plena y con significado.
+                </p>
+            </div>
         </div>
     </section>
-    <section>
-        <h1>¿Que puedo ofrecerte?</h1>
-        <!--Primer curso-->
-        <div>
-            <h2>Motivacion Personalizada</h2>
-            <img src="" alt="photo">
-            <p class="pharagraph">
-                Te inspirare a alcanzar tus objetivos,
-                sin importar cual grandes sean
-                o pequeños sean.
-            </p>
-        </div>
-
-        <!--Curso 2-->
-        <div>
-            <h2>Herramientas Practicas</h2>
-            <img src="" alt="photo">
-            <p class="pharagraph">
-                Te enseñare tecnicas basadas en
-                la filosofia estoica y la espiritualidad
-                para mejorar tu bienestar emocional y mental.
-            </p>
-        </div>
-
-
-        <!--3er curso-->
-        <div>
-            <h2>Desarrollo Personal</h2>
-            <img src="" alt="photo">
-            <p class="pharagraph">
-                Te guiare en un proceso de autodescubrimiento
-                para que conozcas tus fortalezas
-                y trabajes tus areas de oportunidad.
-            </p>
+    
+    <section class="container mt-5">
+        <h1>¿Qué puedo ofrecerte?</h1>
+        <div class="row">
+            <!-- Primer curso -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Motivación Personalizada">
+                    <div class="card-body">
+                        <h2 class="card-title">Motivación Personalizada</h2>
+                        <p class="card-text">
+                            Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Curso 2 -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Herramientas Prácticas">
+                    <div class="card-body">
+                        <h2 class="card-title">Herramientas Prácticas</h2>
+                        <p class="card-text">
+                            Te enseñaré técnicas basadas en la filosofía estoica y la espiritualidad para mejorar tu bienestar emocional y mental.
+                        </p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- 3er curso -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Desarrollo Personal">
+                    <div class="card-body">
+                        <h2 class="card-title">Desarrollo Personal</h2>
+                        <p class="card-text">
+                            Te guiaré en un proceso de autodescubrimiento para que conozcas tus fortalezas y trabajes tus áreas de oportunidad.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    
 
     <section>
         <h1 class="pharagraph">Si estas listo para transformar tu vida,
