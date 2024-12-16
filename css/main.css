@@ -53,6 +53,13 @@ header h1{
         font-size: 2rem !important;
     }
 }
+
+@media (min-width: 992px) {
+    #salmon-image{
+        position: relative;
+        right: 55px;
+    }
+}
 /*Por terminar*/
 #box1{
     display: flex;
@@ -68,6 +75,17 @@ header h1{
     white-space: pre-line;
 }
 
-#salmon-image{
-    width: 300px;
+.btn-inverted-primary {
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #0d6efd; 
+    color: #fff; 
+    border: 2px solid #fff; 
+}
+
+.btn-inverted-primary:hover {
+    transition: 0.2s;
+    background-color: #fff; 
+    color: #0d6efd; 
+    border: 2px solid #0d6efd; 
 }

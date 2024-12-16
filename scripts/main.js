@@ -9,4 +9,8 @@ document.getElementById('Redes-sociales').addEventListener('click', ()=>{
 
 document.getElementById('contacto').addEventListener('click', ()=>{
     //Ventana emergente un pop up
-})
+});
+
+document.getElementById('register').addEventListener('click', ()=>{
+    window.location.href = 'register.html';
+});

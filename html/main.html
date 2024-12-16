@@ -10,7 +10,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!--Change the carpte, the same-->
     <link rel="stylesheet" href="/css/main.css">
-    <title>Main</title>
+    <link rel="icon" type="icon" href="/img/logo salmon.png">
+    <title>Cambia tu vida | Lexo Salmon</title>
 </head>
 <body>
     <header>
@@ -45,30 +46,66 @@
             <img src="/img/main 1.jpg" class="img-fluid" alt="photo">
         </div>
         <h1>Cambia tu entorno</h1>
+        <!--Button change life-->
+        <div class="container text-center mt-5">
+            <button id="change-life" class="btn-inverted-primary"  data-bs-toggle="modal" data-bs-target="#miModal">Quiero cambiar mi vida</button>
+        </div>
+
+        <!--Modal registro-->
+        <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="miModalLabel">Aviso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        Es necesario registrarse para continuar con el pago.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" id="register" class="btn btn-primary">Registrarse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     
-    <main>
-            <div id="box2">
-                <!--Checa si la palabra grandesa, es grandesa-->
-                <h3 class="pharagraph">
-                    Descubre la grandeza 
-                    con la cual descubrirás, tu proposito,
-                    juntos, transformaremos tu vida
+    <main class="container mt-5">
+        <div class="row align-items-center mb-4">
+            <!-- Columna del texto -->
+            <div class="col-md-6">
+                <h3 class="text-primary fw-bold">
+                    Descubre la grandeza
                 </h3>
-                <!--Busca un ejemplo que se relaicione u otra foto-->
-                <img src="" alt="photo">
+                <p>
+                    Con la cual descubrirás tu propósito, juntos transformaremos tu vida.
+                </p>
             </div>
-
-            <div id="box2">
-                <h3 class="pharagraph">
-                    Vive una vida mas plena
-                    y satisfactoria
-                    ¡Contactame para emprender este viaje juntos!
+            <!-- Columna de la imagen -->
+            <div class="col-md-6 text-center">
+                <img src="https://via.placeholder.com/300" alt="photo" class="img-fluid rounded">
+            </div>
+        </div>
+    
+        <div class="row align-items-center">
+            <!-- Columna del texto -->
+            <div class="col-md-6 order-md-2">
+                <h3 class="text-primary fw-bold">
+                    Vive una vida más plena y satisfactoria
                 </h3>
+                <p>
+                    ¡Contáctame para emprender este viaje juntos!
+                </p>
             </div>
-            <!--Busca una imagen relacionada a lo que dice-->
-            <img src="" alt="photo">
+            <!-- Columna de la imagen -->
+            <div class="col-md-6 order-md-1 text-center">
+                <img src="https://via.placeholder.com/300" alt="photo" class="img-fluid rounded">
+            </div>
+        </div>
     </main>
+    
+    
     <!--Seccion de quien es lexo salmon-->
     <section class="container mt-5">
         <h1>¿Quién es Lexo Salmon?</h1>
@@ -164,16 +201,19 @@
     
 
     <!--Salmon section-->
-    <section id="section-footer" class="container-fluid">
-        <h2>Si estas listo para transformar tu vida,
-            contacta conmigo
-        </h2>
-        <div>
-            <img src="/img/logo salmon.png"  alt="photo salmon" id="salmon-image">
+    <section id="section-footer" class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-6 text-start">
+                <h5>Si estás listo para transformar tu vida, contacta conmigo</h5>
+            </div>
+            <div class="col-md-2 text-center">
+                <img src="/img/logo salmon.png" id="salmon-image" class="img-fluid" alt="Photo Salmon">
+            </div>
+            <div class="col-md-4 text-end">
+                <h5>De la planificación a la acción solo existe un paso... ¡Dalo!</h5>
+            </div>
         </div>
-        <h2>De la planificación a la accion
-            solo existe un paso... ¡Dalo!
-        </h1>
+        </div>
     </section>
 
     <footer class="bg-dark text-white text-center py-4">
@@ -196,6 +236,7 @@
             <p class="mt-3">© 2024 Lexo Salmon. Si estas listo para transformar tu vida contacta conmigo</p>
         </div>
     </footer>
+
     
     <!-- Agregar este CDN para los íconos de Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
