@@ -7,3 +7,19 @@
 body{
     background-color: white;
 }
+
+#register-button{
+    background-color: rgb(64, 64, 244);
+    border: 2px;
+}
+
+#container{
+    border: 2px solid grey;
+}
+
+#register-button:hover{
+    transition: 0.2s;
+    background-color: white;
+    color: rgb(64, 64, 244);
+    border: 2px solid rgb(64, 64, 244);
+}
