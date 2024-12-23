@@ -116,7 +116,7 @@ dialog{
 #mainPop{
     display: grid;
     place-items: center;
-    height: 10vh;
+    height: 8vh;
     margin: 0;
 }
 
