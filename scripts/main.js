@@ -31,5 +31,5 @@ closeModal.addEventListener('click', cerrarModal);
 
 
 document.getElementById('register').addEventListener('click', ()=>{
-    window.location.href = 'register.html';
+    window.location.href = '/html/register.html';
 });
