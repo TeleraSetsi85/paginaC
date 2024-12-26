@@ -4,7 +4,10 @@ import React from "react";
 import Navbar from "./Navbar";
 
 function Header() {
-  let btnChangeLife = () => {};
+  let btnChangeLife = () => {
+    
+    
+  };
   return (
     <div>
       <header id="section-header">
