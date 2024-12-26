@@ -7,7 +7,7 @@ function Header() {
   let btnChangeLife = () => {};
   return (
     <div>
-      <header>
+      <header id="section-header">
         <Navbar />
         <h1>Cambia tu mente</h1>
         <div className="container text-center mt-5">
