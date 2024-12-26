@@ -3,7 +3,17 @@ import React from "react";
 // Componentes
 import Navbar from "./Navbar";
 
+
+
 function Header() {
+
+  let btnAboutOf = ()=>{
+    section.scrollIntoView({behavior: 'smooth'});
+  };
+  }
+  let btnChangeLife = ()=>{
+
+  };
   return (
     <div>
       <header>
@@ -21,6 +31,7 @@ function Header() {
       </header>
     </div>
   );
-}
+
+
 
 export default Header;
