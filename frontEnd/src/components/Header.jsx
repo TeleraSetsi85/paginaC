@@ -1,7 +1,10 @@
 import React from "react";
 
 function Header() {
-  let btnChangeLife = () => {};
+  let btnChangeLife = () => {
+    
+    
+  };
   return (
     <div>
       <header id="section-header">
