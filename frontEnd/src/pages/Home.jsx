@@ -1,14 +1,15 @@
 import React from "react";
 
 // Componentes
+import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Home() {
   return (
     <div>
+      <Navbar />
       <Header />
-
       <main className="container mt-5">
         <div className="row align-items-center mb-4">
           <div className="col-md-6">
