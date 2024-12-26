@@ -1,8 +1,5 @@
 import React from "react";
 
-// Componentes
-import Navbar from "./Navbar";
-
 function Header() {
   let btnChangeLife = () => {
     
@@ -11,7 +8,6 @@ function Header() {
   return (
     <div>
       <header id="section-header">
-        <Navbar />
         <h1>Cambia tu mente</h1>
         <div className="container text-center mt-5">
           <img src="/img/main 1.jpg" className="img-fluid" alt="photo" />
