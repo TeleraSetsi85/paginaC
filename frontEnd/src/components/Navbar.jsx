@@ -2,11 +2,11 @@ import React from "react";
 
 function Navbar() {
   let btnHome = () => {
-    document.getElementById("section-header").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("section-header").scrollIntoView(true);
   };
 
   let btnAboutOf = () => {
-    document.getElementById("who-section").scrollIntoView({ behavior: "smooth" });
+    document.getElementById("who-section").scrollIntoView(false);
   };
 
   return (
