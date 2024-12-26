@@ -129,6 +129,41 @@ function Home() {
         </div>
       </section>
 
+      <div
+        class="modal fade"
+        id="contacto-pop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                ¡Contactame!
+              </h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <i className="text-primary">alejandrolopezc@live.com.mx</i>
+            </div>
+            <div className="modal-footer d-flex justify-content-center ">
+              <a href="https://www.facebook.com/share/NmRng2uBJtkdiFuf/" target="_blank" className="contact-btn">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" className="contact-btn">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="https://www.instagram.com/lexo47?igsh=d3A2eHpuODZ1bHdt" target="_blank" className="contact-btn">
+                <i className="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );

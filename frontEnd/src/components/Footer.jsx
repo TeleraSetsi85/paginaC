@@ -7,17 +7,13 @@ function Footer() {
         <div className="container">
           <h5>Sígueme en redes sociales</h5>
           <div className="d-flex justify-content-center mt-3">
-            <a href="https://www.facebook.com/share/NmRng2uBJtkdiFuf/" target="_blank" className="btn btn-outline-light btn-lg rounded-circle mx-2">
+            <a href="https://www.facebook.com/share/NmRng2uBJtkdiFuf/" target="_blank" className="social-btn">
               <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="https://twitter.com" target="_blank" className="btn btn-outline-light btn-lg rounded-circle mx-2">
+            <a href="https://twitter.com" target="_blank" className="social-btn">
               <i className="fab fa-twitter"></i>
             </a>
-            <a
-              href="https://www.instagram.com/lexo47?igsh=d3A2eHpuODZ1bHdt"
-              target="_blank"
-              className="btn btn-outline-light btn-lg rounded-circle mx-2"
-            >
+            <a href="https://www.instagram.com/lexo47?igsh=d3A2eHpuODZ1bHdt" target="_blank" className="social-btn">
               <i className="fab fa-instagram"></i>
             </a>
           </div>
