@@ -1,6 +1,10 @@
 import React from "react";
 
 function Navbar() {
+  let btnAboutOf = () => {
+    document.getElementById("who-section").scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

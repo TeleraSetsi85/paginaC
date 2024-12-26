@@ -3,17 +3,8 @@ import React from "react";
 // Componentes
 import Navbar from "./Navbar";
 
-
-
 function Header() {
-
-  let btnAboutOf = ()=>{
-    section.scrollIntoView({behavior: 'smooth'});
-  };
-  }
-  let btnChangeLife = ()=>{
-
-  };
+  let btnChangeLife = () => {};
   return (
     <div>
       <header>
@@ -24,14 +15,13 @@ function Header() {
         </div>
         <h1>Cambia tu entorno</h1>
         <div className="container text-center mt-5">
-          <button id="change-life" className="btn-inverted-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+          <button onClick={btnChangeLife} className="btn-inverted-primary" data-bs-toggle="modal" data-bs-target="#miModal">
             Quiero cambiar mi vida
           </button>
         </div>
       </header>
     </div>
   );
-
-
+}
 
 export default Header;
