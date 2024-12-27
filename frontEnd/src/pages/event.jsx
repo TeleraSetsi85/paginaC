@@ -31,13 +31,12 @@ function events(){
                 </section>
                 {/*Metodo de pago*/}
                 <dialog>
-
+                    
                 </dialog>
             </main>
         </>
     
     );
-        
 }
 
 export default events;
