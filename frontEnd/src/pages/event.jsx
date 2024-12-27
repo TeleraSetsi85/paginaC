@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-function Events() {
+function Event() {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const openModal = () => setModalOpen(true);
@@ -63,4 +63,4 @@ return (
 );
 }
 
-export default Events;
+export default Event;

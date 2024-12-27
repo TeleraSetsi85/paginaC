@@ -1,10 +1,13 @@
 import React from "react";
+//React route
+import { useNavigate } from "react-router-dom";
 
 function Header() {
-  let btnChangeLife = () => {
-    
-    
-  };
+    const navigate = useNavigate();
+
+    const btnChangeLife = ()=>{
+      navigate('/event');
+    }
   return (
     <div>
       <header id="section-header">
