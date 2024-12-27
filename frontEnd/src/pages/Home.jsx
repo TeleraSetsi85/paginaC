@@ -5,9 +5,23 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+// Ejemplo de llamada al servidor
+import { main } from "../api/servidor";
+
 function Home() {
+  // Ejemplo de uso del servidor
+  const btnBorrar = async () => {
+    try {
+      const res = await main();
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
+      <button onClick={btnBorrar}>Borrar</button>
       <Navbar />
       <Header />
       <main className="container mt-5">
@@ -130,11 +144,11 @@ function Home() {
       </section>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="contacto-pop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
@@ -147,7 +161,7 @@ function Home() {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <i className="text-primary">alejandrolopezc@live.com.mx</i>
+              <i className="text-primary d-flex justify-content-center">alejandrolopezc@live.com.mx</i>
             </div>
             <div className="modal-footer d-flex justify-content-center ">
               <a href="https://www.facebook.com/share/NmRng2uBJtkdiFuf/" target="_blank" className="contact-btn">
