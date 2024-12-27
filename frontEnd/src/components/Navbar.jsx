@@ -9,10 +9,6 @@ function Navbar() {
     document.getElementById("who-section").scrollIntoView({ behavior: "smooth" });
   };
 
-  let btnSocial = () => {
-    document.getElementById("section-footer").scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="navbarContainer">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,24 +31,19 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#" onClick={btnHome}>
+                <button className="nav-link active" aria-current="page" href="#" onClick={btnHome}>
                   Inicio
-                </a>
+                </button>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" onClick={btnAboutOf}>
+                <button className="nav-link" href="#" onClick={btnAboutOf}>
                   Acerca de
-                </a>
+                </button>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#" onClick={btnSocial}>
-                  Redes Sociales
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#" id="contacto">
+                <button className="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contacto-pop">
                   Contacto
-                </a>
+                </button>
               </li>
             </ul>
           </div>
