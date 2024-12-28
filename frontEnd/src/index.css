@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: white;
+  background-color: #18171c;
 }
 
 header {
@@ -20,8 +20,12 @@ header h1 {
   align-items: center;
 }
 /*Por terminar*/
-header nav {
-  position: fixed;
+#navBarMain{
+  background-color: #474a51;
+}
+
+p{
+  color: #fff;
 }
 
 #salmon-logo {
@@ -30,7 +34,11 @@ header nav {
 
 #title-header {
   font-style: italic; /*Luego checar otra fuente*/
-  color: salmon;
+  color: #e35140;
+}
+
+.text-gold {
+  color: #daa520; /* Código de color dorado */
 }
 
 .pharagraph {
@@ -77,16 +85,16 @@ header nav {
 .btn-inverted-primary {
   padding: 10px 15px;
   border-radius: 10px;
-  background-color: #0d6efd;
-  color: #fff;
-  border: 2px solid #fff;
+  background-color: #daa520;
+  color: black;
+  border: 2px solid black;
 }
 
 .btn-inverted-primary:hover {
   transition: 0.2s;
   background-color: #fff;
-  color: #0d6efd;
-  border: 2px solid #0d6efd;
+  color: #18171c;
+  border: 2px solid #18171c;
 }
 
 dialog {

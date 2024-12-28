@@ -27,7 +27,7 @@ function Home() {
       <main className="container mt-5">
         <div className="row align-items-center mb-4">
           <div className="col-md-6">
-            <h3 className="text-primary fw-bold">Descubre la grandeza</h3>
+            <h3 className="text-gold fw-bold">Descubre la grandeza</h3>
             <p>Con la cual descubrirás tu propósito, juntos transformaremos tu vida.</p>
           </div>
           <div className="col-md-6 text-center">
@@ -37,17 +37,17 @@ function Home() {
 
         <div className="row align-items-center">
           <div className="col-md-6 order-md-2">
-            <h3 className="text-primary fw-bold">Vive una vida más plena y satisfactoria</h3>
+            <h3 className="text-gold fw-bold">Vive una vida más plena y satisfactoria</h3>
             <p>¡Contáctame para emprender este viaje juntos!</p>
           </div>
           <div className="col-md-6 order-md-1 text-center">
-            <img src="https://via.placeholder.com/300" alt="photo" className="img-fluid rounded" />
+            <img src="/img/yogaPhoto.jpeg" alt="photo" className="img-fluid rounded" />
           </div>
         </div>
       </main>
 
       <section className="container mt-5" id="who-section">
-        <h1>¿Quién es Lexo Salmon?</h1>
+        <h1 className="text-gold fw-bold">¿Quién es Lexo Salmon?</h1>
         <div className="row align-items-center">
           <div className="col-md-4">
             <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
@@ -91,14 +91,14 @@ function Home() {
       </section>
 
       <section className="container mt-5">
-        <h1>¿Qué puedo ofrecerte?</h1>
+        <h1 className="text-gold fw-bold">¿Qué puedo ofrecerte?</h1>
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
             <div className="card">
               <img src="https://via.placeholder.com/300" className="card-img-top" alt="Motivación Personalizada" />
               <div className="card-body">
                 <h2 className="card-title">Motivación Personalizada</h2>
-                <p className="card-text">Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.</p>
+                <p className="card-text text-dark">Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.</p>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@ function Home() {
               <img src="/img/photo-course 1.jpg" className="card-img-top" alt="Herramientas Prácticas" />
               <div className="card-body">
                 <h2 className="card-title">Herramientas Prácticas</h2>
-                <p className="card-text">
+                <p className="card-text text-dark">
                   Te enseñaré técnicas basadas en la filosofía estoica y la espiritualidad para mejorar tu bienestar emocional y mental.
                 </p>
               </div>
@@ -117,10 +117,10 @@ function Home() {
 
           <div className="col-12 col-md-4 mb-4">
             <div className="card">
-              <img src="https://via.placeholder.com/300" className="card-img-top" alt="Desarrollo Personal" />
+              <img src="/img/desarrolloPhoto.jpeg" className="card-img-top" alt="Desarrollo Personal" />
               <div className="card-body">
                 <h2 className="card-title">Desarrollo Personal</h2>
-                <p className="card-text">
+                <p className="card-text text-dark">
                   Te guiaré en un proceso de autodescubrimiento para que conozcas tus fortalezas y trabajes tus áreas de oportunidad.
                 </p>
               </div>
@@ -135,7 +135,7 @@ function Home() {
             <h5>Si estás listo para transformar tu vida, contacta conmigo</h5>
           </div>
           <div className="col-md-2 text-center">
-            <img src="/img/logo salmon.png" id="salmon-image" className="img-fluid" alt="Photo Salmon" />
+            <img src="/img/salmonLogo.png" id="salmon-image" className="img-fluid" alt="Photo Salmon" />
           </div>
           <div className="col-md-4 text-end">
             <h5>De la planificación a la acción solo existe un paso... ¡Dalo!</h5>

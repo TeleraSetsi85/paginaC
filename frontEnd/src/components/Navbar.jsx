@@ -12,8 +12,8 @@ function Navbar() {
   return (
     <div className="navbarContainer">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-          <img src="/img/logo salmon.png" id="salmon-logo" alt="photo-salmon" />
+        <div className="container-fluid" id="navBarMain">
+          <img src="/img/salmonLogo.png" id="salmon-logo" alt="photo-salmon" />
           <a className="navbar-brand" href="#" id="title-header">
             Lexo Salmon
           </a>
@@ -31,17 +31,17 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <button className="nav-link active" aria-current="page" href="#" onClick={btnHome}>
+                <button id="btnInicio" className="nav-link active text-white" aria-current="page" href="#" onClick={btnHome}>
                   Inicio
                 </button>
               </li>
               <li className="nav-item">
-                <button className="nav-link" href="#" onClick={btnAboutOf}>
+                <button className="nav-link active text-white" href="#" onClick={btnAboutOf}>
                   Acerca de
                 </button>
               </li>
               <li className="nav-item">
-                <button className="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contacto-pop">
+                <button className="nav-link active text-white" href="#" data-bs-toggle="modal" data-bs-target="#contacto-pop">
                   Contacto
                 </button>
               </li>
