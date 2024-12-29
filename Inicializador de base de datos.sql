@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS Courses (
     date DATETIME NOT NULL,
     location VARCHAR(255) NOT NULL,
     slots INT NOT NULL CHECK (slots >= 0),
+    price_slot DECIMAL(10, 2) NOT NULL CHECK (price_slot >= 0) DEFAULT 0.00,
     status BOOLEAN NOT NULL DEFAULT TRUE
 );
 

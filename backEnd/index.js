@@ -1,27 +1,22 @@
 import express from "express";
 import cors from "cors";
 import session from "express-session";
-import dotenv from "dotenv";
 import { router } from "./routes/routes.js";
+import { ORIGIN, PORT, SECRET } from "./config.js";
 
-// Configuración de las variables de entorno
-dotenv.config({
-  path: ".env",
-});
-
-const PORT = process.env.PORT;
 const app = express();
 
 // Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173", // Si por algo falla por politicas de CORS, modifica esta URI para que reconozca el servidor local de react.
+    origin: ORIGIN,
     credentials: true,
   })
 );
+
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
