@@ -47,6 +47,6 @@ router.delete("/admin/courses/:UUID", checkAuth, deleteCourse);
 // Obtener todos los cursos activos de la DB
 router.get("/courses", getActiveCourses);
 
-router.post("/payment/create-order", createOrder);
+router.post("/payment/create-order/:UUID", createOrder);
 router.get("/payment/capture-order", captureOrder);
 router.get("/payment/cancel-Payment", (req, res) => res.send("Orden cancelada"));

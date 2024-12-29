@@ -1,4 +1,3 @@
 # Importante evitar subir el .env a GitHub
 .env
-
 /node_modules

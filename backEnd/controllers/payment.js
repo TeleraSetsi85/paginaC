@@ -2,8 +2,21 @@ import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config
 import axios from "axios";
 import { getCourseInfo } from "./courses.js";
 
-const getOrder = async () => {
-  //const [courseData] = await getCourseInfo(UUID);
+const getOrder = async (UUID) => {
+  const [courseData] = await getCourseInfo(UUID);
+
+  if (!courseData) {
+    throw new Error("No se encontró información del curso.");
+  }
+
+  const formattedDate = new Date(courseData.date).toLocaleString("es-MX", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
 
   return {
     intent: "CAPTURE",
@@ -11,23 +24,23 @@ const getOrder = async () => {
       {
         items: [
           {
-            name: "Node.js Complete Course",
-            description: "Node.js Complete Course with Express and MongoDB",
+            name: courseData.name,
+            description: `${formattedDate} en ${courseData.location}`,
             quantity: 1,
             unit_amount: {
               currency_code: "MXN",
-              value: "100.00",
+              value: courseData.price_slot,
             },
           },
         ],
 
         amount: {
           currency_code: "MXN",
-          value: "100.00",
+          value: courseData.price_slot,
           breakdown: {
             item_total: {
               currency_code: "MXN",
-              value: "100.00",
+              value: courseData.price_slot,
             },
           },
         },
@@ -39,7 +52,7 @@ const getOrder = async () => {
       cancel_url: URI + "/payment/cancel-Payment",
       shipping_preference: "NO_SHIPPING",
       user_action: "PAY_NOW",
-      brand_name: "manfra.io",
+      brand_name: "Lexo Salmon",
     },
   };
 };
@@ -65,7 +78,9 @@ const getAccessToken = async () => {
 
 export const createOrder = async (req, res) => {
   try {
-    const order = await getOrder();
+    const { UUID } = req.params;
+
+    const order = await getOrder(UUID);
 
     const access_token = await getAccessToken();
 
