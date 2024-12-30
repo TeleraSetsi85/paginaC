@@ -1,6 +1,5 @@
 import { Router } from "express";
 
-import { fileURLToPath } from "url";
 import { createPool } from "mysql2/promise";
 import { login, logOut, checkAuth } from "../controllers/auth.js";
 import { deleteCourse, getActiveCourses, getCourses, getCourseUsersInfo, setCourse, updateCourse } from "../controllers/courses.js";
@@ -46,6 +45,9 @@ router.delete("/admin/courses/:UUID", checkAuth, deleteCourse);
 
 // Obtener todos los cursos activos de la DB
 router.get("/courses", getActiveCourses);
+
+// Permite verificar el boleto de un usuario y determina si es real o no
+router.get("/checkUser/:UUID", (req, res) => res.send("User"));
 
 router.post("/payment/create-order/:UUID", createOrder);
 router.get("/payment/capture-order", captureOrder);

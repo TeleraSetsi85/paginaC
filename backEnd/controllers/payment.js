@@ -1,12 +1,14 @@
 import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config.js";
 import axios from "axios";
-import { getCourseInfo } from "./courses.js";
+import PDFDocument from "pdfkit";
+import { addClient, confirmClient, getClientInfo, getCourseInfo } from "./courses.js";
 
-const getOrder = async (UUID) => {
+const getOrder = async (UUID, { name, lastname }) => {
   const [courseData] = await getCourseInfo(UUID);
+  const userId = await addClient(UUID, name, lastname);
 
-  if (!courseData) {
-    throw new Error("No se encontró información del curso.");
+  if (!courseData || !userId) {
+    throw new Error("No se encontró información del curso o le faltan datos del usuario");
   }
 
   const formattedDate = new Date(courseData.date).toLocaleString("es-MX", {
@@ -48,8 +50,8 @@ const getOrder = async (UUID) => {
     ],
 
     application_context: {
-      return_url: URI + "/payment/capture-order",
-      cancel_url: URI + "/payment/cancel-Payment",
+      return_url: URI + "/payment/capture-order/?UUID=" + userId,
+      cancel_url: URI + "/payment/cancel-Payment/?UUID=" + userId,
       shipping_preference: "NO_SHIPPING",
       user_action: "PAY_NOW",
       brand_name: "Lexo Salmon",
@@ -79,8 +81,13 @@ const getAccessToken = async () => {
 export const createOrder = async (req, res) => {
   try {
     const { UUID } = req.params;
+    const userData = req.body;
 
-    const order = await getOrder(UUID);
+    if (!UUID || !userData) {
+      throw new Error("Parametros o datos faltantes");
+    }
+
+    const order = await getOrder(UUID, userData);
 
     const access_token = await getAccessToken();
 
@@ -107,7 +114,7 @@ export const createOrder = async (req, res) => {
 
 export const captureOrder = async (req, res) => {
   try {
-    const { token } = req.query;
+    const { UUID, token } = req.query;
 
     const response = await axios.post(
       `${PAYPAL_API}/v2/checkout/orders/${token}/capture`,
@@ -120,15 +127,72 @@ export const captureOrder = async (req, res) => {
       }
     );
 
-    return res.status(200).json({
-      message: "Pago exitoso",
-      body: response.data,
-    });
+    const payment_ID = response.data.purchase_units[0].payments.captures[0].id;
+    confirmClient(UUID, payment_ID);
+
+    const doc = new PDFDocument();
+    const chunks = [];
+
+    generateTicket(
+      doc,
+      UUID,
+      (chunk) => chunks.push(chunk),
+      () => {
+        const pdfBuffer = Buffer.concat(chunks);
+        const base64Pdf = `data:application/pdf;base64,${pdfBuffer.toString("base64")}`;
+
+        res.status(200).json({
+          message: "Ticket generado correctamente",
+          pdf: base64Pdf,
+        });
+      },
+      (error) => {
+        res.status(500).json({
+          message: "Error al generar el ticket",
+          error: error.message,
+        });
+      }
+    );
   } catch (error) {
     const message = "Error al intentar capturar la orden de pago: " + error;
     console.log(message);
     res.status(500).json({
       message: message,
     });
+  }
+};
+
+const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallback) => {
+  try {
+    const [userData] = await getClientInfo(UUID);
+    const [showData] = await getCourseInfo(userData.course_id);
+
+    doc.on("data", dataCallback);
+    doc.on("end", endCallback);
+
+    const margin = 20;
+    const width = 612 - margin * 2;
+    const height = 264 - margin * 2;
+    doc.rect(margin, margin, width, height).lineWidth(2).strokeColor("#9EA18E").stroke();
+
+    //doc.image("./src/logotipo.png", width - 20, height - 20, { scale: 0.25 });
+
+    const formattedDate = new Date(showData.date).toLocaleString("es-MX", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+
+    doc.text(`${showData.name}`, 280, 40);
+    doc.text(`${formattedDate}\n${showData.location}`, 280, 40);
+    doc.text(`${showData.price_slot}`, 280, 40);
+
+    doc.end();
+  } catch (error) {
+    console.log("Error al intentar generar el ticket: " + error.message);
+    if (errorCallback) errorCallback(error);
   }
 };
