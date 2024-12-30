@@ -10,7 +10,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbarContainer">
+    <div className="bg-dark navbarContainer">
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid" id="navBarMain">
           <img src="/img/salmonLogo.png" id="salmon-logo" alt="photo-salmon" />

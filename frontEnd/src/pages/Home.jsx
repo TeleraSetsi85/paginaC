@@ -9,19 +9,9 @@ import Footer from "../components/Footer";
 import { main } from "../api/servidor";
 
 function Home() {
-  // Ejemplo de uso del servidor
-  const btnBorrar = async () => {
-    try {
-      const res = await main();
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div>
-      <button onClick={btnBorrar}>Borrar</button>
       <Navbar />
       <Header />
       <main className="container mt-5">

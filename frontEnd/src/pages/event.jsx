@@ -11,7 +11,7 @@ function Event() {
 
 return (
     <>
-    <header className="bg-primary text-white py-3 text-center">
+    <header className="bg-dark text-white py-3 text-center">
         <h1>Próximos Eventos</h1>
     </header>
 
@@ -26,13 +26,13 @@ return (
             <div className="col-md-6 offset-md-3 card shadow-sm p-4">
                 <h3 className="card-title text-center">Nombre del evento</h3>
                 <img
-                    src=""
+                    src="/img/main 1.jpg"
                     alt="photo-event"
                     className="card-img-top mb-3"
                     style={{ height: "200px", objectFit: "cover" }}
                 />
-                <p className="text-muted text-center mb-1">Fecha: 00/00/00</p>
-                <p className="text-muted text-center mb-3">Hora: 00:00:00</p>
+                <p className="text-center mb-1">Fecha: 00/00/00</p>
+                <p className="text-center mb-3">Hora: 00:00:00</p>
                 <p className="card-text">Descripción del evento</p>
                 <p className="fw-bold text-center">Costo: $XX.XX</p>
                 <div className="d-grid">
@@ -124,7 +124,6 @@ return (
         )}
     </main>
 </>
-
 );
 }
 
