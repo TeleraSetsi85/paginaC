@@ -1,175 +1,165 @@
-/*Estilos main page*/
 
-* {
+*{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+.text-gold {
+  color: #daa520; 
+}
+
+.text-dark {
+  color: #474a51;
+}
+
+
 body {
   background-color: #18171c;
+  color: #fff; 
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
 }
 
-header {
-  padding: 10px 15px;
-}
-
-header h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/*Por terminar*/
-#navBarMain{
-  background-color: #474a51;
-}
-
-p{
-  color: #fff;
+#title-header {
+  font-style: italic;
+  color: #e35140;
 }
 
 #salmon-logo {
   width: 50px;
 }
 
-#title-header {
-  font-style: italic; /*Luego checar otra fuente*/
-  color: #e35140;
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.text-gold {
-  color: #daa520; /* Código de color dorado */
-}
-
-.pharagraph {
-  white-space: pre-line;
-}
-
-.custom-text {
-  font-size: 1rem;
-}
-
-/*Celular*/
-@media (min-width: 768px) {
-  .custom-text {
-    font-size: 1.25rem !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .custom-text {
-    font-size: 1.5rem !important;
-  }
-}
-
-@media (min-width: 1200px) {
-  .custom-text {
-    font-size: 2rem !important;
-  }
-}
-
-@media (min-width: 992px) {
-  #salmon-image {
-    position: relative;
-    right: 55px;
-  }
-}
-
-#section-footer {
+header h1{
   display: flex;
-  justify-content: space-between;
-  white-space: pre-line;
+  justify-content: center;
+  align-items: center;
 }
 
-/*Boton cambiar mi vida*/
-.btn-inverted-primary {
-  padding: 10px 15px;
-  border-radius: 10px;
+.container {
+  background-color: transparent; 
+}
+
+
+button {
   background-color: #daa520;
-  color: black;
-  border: 2px solid black;
+  color: #18171c;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.btn-inverted-primary:hover {
+button:hover {
   transition: 0.2s;
   background-color: #fff;
   color: #18171c;
-  border: 2px solid #18171c;
 }
 
-dialog {
-  padding: auto;
-  margin: auto;
-  border: none;
-  width: 300px;
-  height: 200px;
+
+main .row {
+  margin-bottom: 30px;
+}
+
+main img {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Carrusel */
+#carouselExample .carousel-inner {
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
 }
 
-#close-modal {
-  padding: 10px 15px;
-  border-radius: 5px;
-  border: none;
-  background-color: #fff;
+#carouselExample .carousel-control-prev-icon,
+#carouselExample .carousel-control-next-icon {
+  filter: invert(100%);
+}
+
+
+.card {
+  background-color: #1f1e23; 
+  border: 1px solid #474a51;
+  border-radius: 10px;
+  color: #fff;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  color: #daa520;
   font-weight: bold;
 }
 
-#headerPop {
-  display: flex;
-  justify-content: space-around;
+.card-text {
+  color: #e0e0e0; 
 }
 
-#mainPop {
-  display: grid;
-  place-items: center;
-  height: 8vh;
-  margin: 0;
+.card-img-top {
+  border-radius: 10px 10px 0 0;
 }
 
-#iconEma {
-  font-size: 15px;
-  padding-right: 10px;
+/*Footter*/
+#section-footer {
+  background-color: #474a51;
+  color: #fff;
+  padding: 20px;
 }
 
-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+
+#section-footer h5 {
+  margin-bottom: 0;
 }
 
-.navbarContainer {
-  position: sticky;
-  top: 0;
-  z-index: 999;
+#salmon-image {
+  max-height: 100px;
 }
 
-.contact-btn,
-.social-btn {
-  width: 3rem;
-  height: 3rem;
-  margin: 1rem;
-  font-size: 20px;
-  border: 2px solid black;
-  color: black;
+@media (min-width: 1024px) {
+  #salmon-image {
+    position: relative;
+    right: 12rem;
+  }
+}
+
+/* Modal */
+.modal-content {
+  background-color: #1f1e23;
+  color: #fff;
+}
+
+.modal-header {
+  border-bottom: 1px solid #474a51;
+}
+
+.modal-body {
+  color: #daa520;
+}
+
+.contact-btn {
+  background-color: #daa520;
+  color: #18171c;
+  border: none;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  transition: 300ms ease-in-out;
-}
-
-.social-btn {
-  border: 2px solid white;
-  color: white;
+  transition: background-color 0.3s ease;
 }
 
 .contact-btn:hover {
-  color: white;
-  background-color: black;
+  transition: 0.2s;
+  background-color: #fff;
+  color: #18171c;
 }
 
-.social-btn:hover {
-  color: black;
-  background-color: white;
-}
+

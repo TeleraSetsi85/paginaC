@@ -9,19 +9,9 @@ import Footer from "../components/Footer";
 import { main } from "../api/servidor";
 
 function Home() {
-  // Ejemplo de uso del servidor
-  const btnBorrar = async () => {
-    try {
-      const res = await main();
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div>
-      <button onClick={btnBorrar}>Borrar</button>
       <Navbar />
       <Header />
       <main className="container mt-5">
@@ -98,7 +88,7 @@ function Home() {
               <img src="https://via.placeholder.com/300" className="card-img-top" alt="Motivación Personalizada" />
               <div className="card-body">
                 <h2 className="card-title">Motivación Personalizada</h2>
-                <p className="card-text text-dark">Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.</p>
+                <p className="card-text text-white">Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.</p>
               </div>
             </div>
           </div>
@@ -108,7 +98,7 @@ function Home() {
               <img src="/img/photo-course 1.jpg" className="card-img-top" alt="Herramientas Prácticas" />
               <div className="card-body">
                 <h2 className="card-title">Herramientas Prácticas</h2>
-                <p className="card-text text-dark">
+                <p className="card-text text-white">
                   Te enseñaré técnicas basadas en la filosofía estoica y la espiritualidad para mejorar tu bienestar emocional y mental.
                 </p>
               </div>
@@ -120,7 +110,7 @@ function Home() {
               <img src="/img/desarrolloPhoto.jpeg" className="card-img-top" alt="Desarrollo Personal" />
               <div className="card-body">
                 <h2 className="card-title">Desarrollo Personal</h2>
-                <p className="card-text text-dark">
+                <p className="card-text text-white">
                   Te guiaré en un proceso de autodescubrimiento para que conozcas tus fortalezas y trabajes tus áreas de oportunidad.
                 </p>
               </div>
@@ -129,19 +119,8 @@ function Home() {
         </div>
       </section>
 
-      <section id="section-footer" className="container">
-        <div className="row align-items-center justify-content-between">
-          <div className="col-md-6 text-start">
-            <h5>Si estás listo para transformar tu vida, contacta conmigo</h5>
-          </div>
-          <div className="col-md-2 text-center">
-            <img src="/img/salmonLogo.png" id="salmon-image" className="img-fluid" alt="Photo Salmon" />
-          </div>
-          <div className="col-md-4 text-end">
-            <h5>De la planificación a la acción solo existe un paso... ¡Dalo!</h5>
-          </div>
-        </div>
-      </section>
+
+
 
       <div
         className="modal fade"
