@@ -7,11 +7,19 @@ import Footer from "../components/Footer";
 
 // Ejemplo de llamada al servidor
 import { main } from "../api/servidor";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
+  //Solo para visualizar la pagina de admin, pero no se usara para esto, ignoralo
+  const navigate = useNavigate(); 
+
+  const btnAdmin = () => {
+    navigate('/admin'); 
+  };
   return (
     <div>
+      <button onClick={btnAdmin}>Admin</button>
       <Navbar />
       <Header />
       <main className="container mt-5">
