@@ -3,7 +3,7 @@ import { Router } from "express";
 import { createPool } from "mysql2/promise";
 import { login, logOut, checkAuth } from "../controllers/auth.js";
 import { deleteCourse, getActiveCourses, getCourses, getCourseUsersInfo, setCourse, updateCourse } from "../controllers/courses.js";
-import { captureOrder, createOrder } from "../controllers/payment.js";
+import { cancelOrder, captureOrder, checkTicket, createOrder } from "../controllers/payment.js";
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from "../config.js";
 
 export const router = Router();
@@ -47,8 +47,13 @@ router.delete("/admin/courses/:UUID", checkAuth, deleteCourse);
 router.get("/courses", getActiveCourses);
 
 // Permite verificar el boleto de un usuario y determina si es real o no
-router.get("/checkUser/:UUID", (req, res) => res.send("User"));
+router.get("/checkUser/:UUID", checkTicket);
 
+// Crea la orden de pago en la API de PAYPAL
 router.post("/payment/create-order/:UUID", createOrder);
+
+// Confirma la orden de pago en la API de PAYPAL
 router.get("/payment/capture-order", captureOrder);
-router.get("/payment/cancel-Payment", (req, res) => res.send("Orden cancelada"));
+
+// Cancela la orden de pago en la API de PAYPAL
+router.get("/payment/cancel-Payment", cancelOrder);

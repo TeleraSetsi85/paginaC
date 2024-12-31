@@ -202,6 +202,7 @@ export const addClient = async (UUID, name, lastname) => {
   }
 };
 
+// Confirma la reservación
 export const confirmClient = async (UUID, payment_ID) => {
   try {
     if (!UUID || !payment_ID) {
@@ -214,13 +215,38 @@ export const confirmClient = async (UUID, payment_ID) => {
   }
 };
 
+// Cancela la reservación
+export const cancelClient = async (UUID) => {
+  try {
+    if (!UUID) {
+      throw new Error("Falta UUID");
+    }
+
+    await pool.query("DELETE FROM reservations WHERE id = ?", [UUID]);
+  } catch (error) {
+    throw new Error("Error al intentar confirmar cliente: " + error.message);
+  }
+};
+
 export const getClientInfo = async (UUID) => {
   try {
     if (!UUID) {
       throw new Error("Faltan datos");
     }
 
-    const [response] = await pool.query("SELECT * FROM reservations WHERE id = ?", [UUID]);
+    const [response] = await pool.query(
+      `
+      SELECT 
+        r.client_name, 
+        r.client_lastname, 
+        r.date,
+        c.name AS course_name
+      FROM reservations r
+      JOIN courses c ON r.course_id = c.id
+      WHERE r.id = ?`,
+      [UUID]
+    );
+
     return response;
   } catch (error) {
     throw new Error("Error al intentar confirmar cliente: " + error.message);
