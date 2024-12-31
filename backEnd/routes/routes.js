@@ -24,7 +24,7 @@ export const pool = createPool({
 router.post("/admin", login);
 
 // Cierra sesión
-router.post("/admin/logout", logOut);
+router.post("/admin/logout", checkAuth, logOut);
 
 // Obtener todos los cursos de la DB
 router.get("/admin/courses", checkAuth, getCourses);

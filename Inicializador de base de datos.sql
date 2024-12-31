@@ -8,6 +8,7 @@ USE LSCourses;
 CREATE TABLE IF NOT EXISTS Courses (
     id CHAR(36) PRIMARY KEY NOT NULL DEFAULT (UUID()),
     name VARCHAR(255) NOT NULL,
+    details TEXT NULL,
     date DATETIME NOT NULL,
     location VARCHAR(255) NOT NULL,
     slots INT NOT NULL CHECK (slots >= 0),
