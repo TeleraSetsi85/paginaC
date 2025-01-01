@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 
 // Ejemplo de llamada al servidor
 import { main } from "../api/servidor";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom"; 
 
 function Home() {
@@ -25,9 +24,7 @@ function Home() {
 
   const handleLogin = () => {
     if (username === validUsername && password === validPassword) {
-      // setErrorMessage("");
       setShowLoginModal(false); // Cierra el modal
-
       navigate('/admin'); 
     } else {
       setErrorMessage('Datos incorrectos, intentelo de nuevo');
@@ -38,8 +35,8 @@ function Home() {
     <div>
       {/*Para abrir el modal */}
       <div>
-      <button className="btn btn-primary" onClick={() => setShowLoginModal(true)}>Admin</button>
-
+        <button className="btn btn-primary" onClick={() => setShowLoginModal(true)}>Admin</button>
+      </div>
       {/* Modal para el login */}
       {showLoginModal && (
         <div className="modal-overlay">
@@ -67,12 +64,15 @@ function Home() {
           </div>
         </div>
       )}
-=======
+    </div>
+  );
+}
+
+
 
 function Home() {
   return (
     <div className="masterContainer">
->>>>>>> 839867eb449850ab997ceed44d9a6a535d1d3b06
       <Navbar />
       <Header />
       <main className="container">
@@ -217,7 +217,6 @@ function Home() {
 
       <Footer />
     </div>
-  </div>
   );
 }
 
