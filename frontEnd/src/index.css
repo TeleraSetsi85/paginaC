@@ -1,68 +1,102 @@
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.masterContainer,
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .text-gold {
-  color: #daa520; 
+  color: #daa520;
 }
 
 .text-dark {
   color: #474a51;
 }
 
-
 body {
   background-color: #18171c;
-  color: #fff; 
-  font-family: 'Arial', sans-serif;
+  color: #fff;
+  font-family: "Arial", sans-serif;
   line-height: 1.6;
 }
 
 #title-header {
   font-style: italic;
   color: #e35140;
+  margin: 0;
 }
 
 #salmon-logo {
   width: 50px;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   text-transform: uppercase;
+  margin: 0 !important;
 }
 
-header h1{
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .container {
-  background-color: transparent; 
+  background-color: transparent;
 }
 
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 1rem 0;
+}
 
-button {
-  background-color: #daa520;
-  color: #18171c;
+.navbarButton,
+.goldenButton {
+  color: #fff !important;
   border: none;
   border-radius: 5px;
-  padding: 10px 15px;
   font-weight: bold;
+  padding: 0.5rem 1rem;
+  white-space: nowrap !important;
   cursor: pointer;
+  transition: 200ms ease-in-out !important;
 }
 
-button:hover {
-  transition: 0.2s;
+.goldenButton {
+  background-color: #b68710;
+}
+
+.navbarButton:hover {
   background-color: #fff;
-  color: #18171c;
+  color: #18171c !important;
 }
 
+.goldenButton:hover {
+  background-color: #77590c;
+}
 
 main .row {
   margin-bottom: 30px;
@@ -82,9 +116,8 @@ main img {
   filter: invert(100%);
 }
 
-
 .card {
-  background-color: #1f1e23; 
+  background-color: #1f1e23;
   border: 1px solid #474a51;
   border-radius: 10px;
   color: #fff;
@@ -98,7 +131,7 @@ main img {
 }
 
 .card-text {
-  color: #e0e0e0; 
+  color: #e0e0e0;
 }
 
 .card-img-top {
@@ -111,7 +144,6 @@ main img {
   color: #fff;
   padding: 20px;
 }
-
 
 #section-footer h5 {
   margin-bottom: 0;
@@ -161,5 +193,3 @@ main img {
   background-color: #fff;
   color: #18171c;
 }
-
-

@@ -3,21 +3,21 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const btnChangeLife = ()=>{
-      navigate('/event');
-    }
+  const btnChangeLife = () => {
+    navigate("/event");
+  };
   return (
     <div>
       <header id="section-header">
         <h1>Cambia tu mente</h1>
-        <div className="container text-center mt-5">
+        <div className="container text-center">
           <img src="/img/main 1.jpg" className="img-fluid" alt="photo" />
         </div>
         <h1>Cambia tu entorno</h1>
-        <div className="container text-center mt-5">
-          <button onClick={btnChangeLife} className="btn-inverted-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+        <div className="container d-flex align-items-center">
+          <button onClick={btnChangeLife} className="goldenButton" data-bs-toggle="modal" data-bs-target="#miModal">
             Quiero cambiar mi vida
           </button>
         </div>

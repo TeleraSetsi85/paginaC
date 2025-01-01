@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 
 // Ejemplo de llamada al servidor
 import { main } from "../api/servidor";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom"; 
 
 function Home() {
@@ -66,10 +67,16 @@ function Home() {
           </div>
         </div>
       )}
+=======
+
+function Home() {
+  return (
+    <div className="masterContainer">
+>>>>>>> 839867eb449850ab997ceed44d9a6a535d1d3b06
       <Navbar />
       <Header />
-      <main className="container mt-5">
-        <div className="row align-items-center mb-4">
+      <main className="container">
+        <div className="row align-items-center mb-0">
           <div className="col-md-6">
             <h3 className="text-gold fw-bold">Descubre la grandeza</h3>
             <p>Con la cual descubrirás tu propósito, juntos transformaremos tu vida.</p>
@@ -79,7 +86,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="row align-items-center">
+        <div className="row align-items-center mb-0">
           <div className="col-md-6 order-md-2">
             <h3 className="text-gold fw-bold">Vive una vida más plena y satisfactoria</h3>
             <p>¡Contáctame para emprender este viaje juntos!</p>
@@ -90,7 +97,7 @@ function Home() {
         </div>
       </main>
 
-      <section className="container mt-5" id="who-section">
+      <section className="container" id="who-section">
         <h1 className="text-gold fw-bold">¿Quién es Lexo Salmon?</h1>
         <div className="row align-items-center">
           <div className="col-md-4">
@@ -134,7 +141,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="container mt-5">
+      <section className="container ">
         <h1 className="text-gold fw-bold">¿Qué puedo ofrecerte?</h1>
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
@@ -172,9 +179,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-
-
 
       <div
         className="modal fade"

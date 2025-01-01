@@ -1,7 +1,8 @@
 import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config.js";
 import axios from "axios";
 import PDFDocument from "pdfkit";
-import { addClient, confirmClient, getClientInfo, getCourseInfo } from "./courses.js";
+import QRCode from "qrcode";
+import { addClient, cancelClient, confirmClient, getClientInfo, getCourseInfo } from "./courses.js";
 
 const getOrder = async (UUID, { name, lastname }) => {
   const [courseData] = await getCourseInfo(UUID);
@@ -166,16 +167,7 @@ const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallbac
   try {
     const [userData] = await getClientInfo(UUID);
     const [showData] = await getCourseInfo(userData.course_id);
-
-    doc.on("data", dataCallback);
-    doc.on("end", endCallback);
-
-    const margin = 20;
-    const width = 612 - margin * 2;
-    const height = 264 - margin * 2;
-    doc.rect(margin, margin, width, height).lineWidth(2).strokeColor("#9EA18E").stroke();
-
-    //doc.image("./src/logotipo.png", width - 20, height - 20, { scale: 0.25 });
+    const userURL = URI + "/checkUser/" + UUID;
 
     const formattedDate = new Date(showData.date).toLocaleString("es-MX", {
       day: "numeric",
@@ -186,13 +178,73 @@ const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallbac
       hour12: true,
     });
 
-    doc.text(`${showData.name}`, 280, 40);
-    doc.text(`${formattedDate}\n${showData.location}`, 280, 40);
-    doc.text(`${showData.price_slot}`, 280, 40);
+    const qrImagePath = "./temp_qr.png";
+    await QRCode.toFile(qrImagePath, userURL);
+
+    doc.on("data", dataCallback);
+    doc.on("end", endCallback);
+
+    doc.image("./src/left.png", 20, 20, { width: 84 });
+    doc.image("./src/right.png", 508, 20, { width: 84 });
+
+    doc.rect(20, 20, 572, 254).lineWidth(2).strokeColor("#f0f0f0").stroke();
+
+    doc.lineWidth(8).strokeColor("#a7a7a7").moveTo(100, 50).lineTo(280, 50).stroke();
+    doc.lineWidth(8).strokeColor("#e4e4e4").moveTo(280, 50).lineTo(512, 50).stroke();
+
+    doc.lineWidth(8).strokeColor("#e4e4e4").moveTo(100, 244).lineTo(332, 244).stroke();
+    doc.lineWidth(8).strokeColor("#a7a7a7").moveTo(332, 244).lineTo(512, 244).stroke();
+
+    doc.font("Helvetica-Bold").fontSize(18).text(`${showData.name}`, 120, 100, { width: 240, align: "left" });
+    doc.font("Helvetica").fontSize(12).text(`${formattedDate}\n${showData.location}`, 120, 200, { width: 200, align: "left" });
+
+    doc.image("./src/logotipo.jpg", 535, 220, { scale: 0.1 });
+    doc.image(qrImagePath, 370, 80, { scale: 0.75 });
+    doc.save();
+    doc.rotate(-90, { origin: [368, 185] });
+    doc.text(`$${showData.price_slot} MXN`, 368, 185);
+    doc.restore();
 
     doc.end();
   } catch (error) {
     console.log("Error al intentar generar el ticket: " + error.message);
     if (errorCallback) errorCallback(error);
+  }
+};
+
+export const cancelOrder = async (req, res) => {
+  try {
+    const { UUID } = req.query;
+
+    await cancelClient(UUID);
+
+    res.status(200).json({
+      message: "Operación cancelada",
+    });
+  } catch (error) {
+    const message = "Error al intentar cancelar la orden de pago: " + error;
+    console.log(message);
+    res.status(500).json({
+      message: message,
+    });
+  }
+};
+
+export const checkTicket = async (req, res) => {
+  try {
+    const { UUID } = req.params;
+
+    const [response] = await getClientInfo(UUID);
+
+    res.status(200).json({
+      message: "Verificación correcta",
+      body: response,
+    });
+  } catch (error) {
+    const message = "Error al intentar verificar el boleto: " + error;
+    console.log(message);
+    res.status(500).json({
+      message: message,
+    });
   }
 };
