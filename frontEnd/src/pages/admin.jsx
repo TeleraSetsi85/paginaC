@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "../styles/admin.css";
 
+//Pagina para solamente el autor, para que registre eventos
+
 function Admin() {
-  const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
 
-  const btnAdd = () => setModalOpen(true);
-  const btnClose = () => setModalOpen(false);
+    const btnAdd = () => setModalOpen(true);
+    const btnClose = () => setModalOpen(false);
 
-  return (
+    return (
     <div>
         <header className="bg-dark text-white py-3 text-center">
             <h1>Administrador de eventos</h1>

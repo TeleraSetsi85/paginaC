@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Componentes
 import Navbar from "../components/Navbar";
@@ -7,19 +7,65 @@ import Footer from "../components/Footer";
 
 // Ejemplo de llamada al servidor
 import { main } from "../api/servidor";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 function Home() {
+  //Solo para visualizar la pagina de admin, pero no se usara para esto, ignoralo, se cambiara por url
+  const [showLoginModal, setShowLoginModal] = useState(false); // Estado para controlar el modal
+  const [username, setUsername] = useState(""); // Usuario
+  const [password, setPassword] = useState(""); // Contraseña
+  const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
 
-  //Solo para visualizar la pagina de admin, pero no se usara para esto, ignoralo
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  
+  //usuario y contraseña temporales
+  const validUsername = "autor";
+  const validPassword = "1234";
 
-  const btnAdmin = () => {
-    navigate('/admin'); 
+  const handleLogin = () => {
+    if (username === validUsername && password === validPassword) {
+      // setErrorMessage("");
+      setShowLoginModal(false); // Cierra el modal
+
+      navigate('/admin'); 
+    } else {
+      setErrorMessage('Datos incorrectos, intentelo de nuevo');
+    }
   };
+
   return (
     <div>
-      <button onClick={btnAdmin}>Admin</button>
+      {/*Para abrir el modal */}
+      <div>
+      <button className="btn btn-primary" onClick={() => setShowLoginModal(true)}>Admin</button>
+
+      {/* Modal para el login */}
+      {showLoginModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Inicio de Sesión</h2>
+            <input
+              type="text"
+              placeholder="Usuario"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="form-control mb-2"
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control mb-2"
+            />
+            <button className="btn btn-success me-2" onClick={handleLogin}>Ingresar</button>
+
+            <button className="btn btn-secondary" onClick={() => setShowLoginModal(false)}>Salir</button>
+
+            {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+          </div>
+        </div>
+      )}
       <Navbar />
       <Header />
       <main className="container mt-5">
@@ -167,7 +213,9 @@ function Home() {
 
       <Footer />
     </div>
+  </div>
   );
 }
 
 export default Home;
+
