@@ -1,5 +1,6 @@
 import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config.js";
 import axios from "axios";
+import fs from "fs";
 import PDFDocument from "pdfkit";
 import QRCode from "qrcode";
 import { addClient, cancelClient, confirmClient, getClientInfo, getCourseInfo } from "./courses.js";
@@ -141,6 +142,15 @@ export const captureOrder = async (req, res) => {
       () => {
         const pdfBuffer = Buffer.concat(chunks);
         const base64Pdf = `data:application/pdf;base64,${pdfBuffer.toString("base64")}`;
+        const qrImagePath = "./src/tmp/temp_qr.png";
+
+        fs.unlink(qrImagePath, (err) => {
+          if (err) {
+            console.error("Error al eliminar el archivo QR:", err.message);
+          } else {
+            console.log("Archivo QR eliminado exitosamente.");
+          }
+        });
 
         res.status(200).json({
           message: "Ticket generado correctamente",
@@ -178,7 +188,7 @@ const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallbac
       hour12: true,
     });
 
-    const qrImagePath = "./temp_qr.png";
+    const qrImagePath = "./src/tmp/temp_qr.png";
     await QRCode.toFile(qrImagePath, userURL);
 
     doc.on("data", dataCallback);
