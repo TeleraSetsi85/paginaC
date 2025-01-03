@@ -58,28 +58,17 @@ export const getCourseUsersInfo = async (req, res) => {
 // Crea un nuevo curso
 export const setCourse = async (req, res) => {
   try {
-    const { name, date, location, slots, price, status } = req.body;
+    const { name, details, date, location, slots, price, status } = req.body; // slots y price son numeros, y status un boolean, los demas son strings
 
-    if (!name || !date || !location || slots === undefined || price === undefined) {
+    if (!name || !details || !date || !location || slots === undefined || price === undefined) {
       return res.status(400).json({
         message: "Todos los campos obligatorios deben estar presentes: name, date, location, slots, price.",
       });
     }
 
-    if (typeof slots !== "number" || slots < 0) {
-      return res.status(400).json({
-        message: "El campo 'slots' debe ser un número mayor o igual a 0.",
-      });
-    }
-
-    if (typeof price !== "number" || price < 0) {
-      return res.status(400).json({
-        message: "El campo 'price' debe ser un número mayor o igual a 0.",
-      });
-    }
-
-    await pool.query("INSERT INTO courses (name, date, location, slots, price_slot, status) VALUES (?, ?, ?, ?, ?, ?);", [
+    await pool.query("INSERT INTO courses (name, details, date, location, slots, price_slot, status) VALUES (?, ?, ?, ?, ?, ?, ?);", [
       name,
+      details,
       date,
       location,
       slots,
@@ -103,28 +92,17 @@ export const setCourse = async (req, res) => {
 export const updateCourse = async (req, res) => {
   try {
     const { UUID } = req.params;
-    const { name, date, location, slots, price, status } = req.body;
+    const { name, details, date, location, slots, price, status } = req.body;
 
-    if (!UUID || !name || !date || !location || slots === undefined || price === undefined) {
+    if (!UUID || !name || !details || !date || !location || slots === undefined || price === undefined) {
       return res.status(400).json({
-        message: "Todos los campos obligatorios deben estar presentes: name, date, location, slots, price.",
+        message: "Todos los campos obligatorios deben estar presentes: UUID, name, date, location, slots, price.",
       });
     }
 
-    if (typeof slots !== "number" || slots < 0) {
-      return res.status(400).json({
-        message: "El campo 'slots' debe ser un número mayor o igual a 0.",
-      });
-    }
-
-    if (typeof price !== "number" || price < 0) {
-      return res.status(400).json({
-        message: "El campo 'price' debe ser un número mayor o igual a 0.",
-      });
-    }
-
-    await pool.query("UPDATE courses SET name = ?, date = ?, location = ?, slots = ?, price_slot = ?, status = ? WHERE id = ?;", [
+    await pool.query("UPDATE courses SET name = ?, details = ?, date = ?, location = ?, slots = ?, price_slot = ?, status = ? WHERE id = ?;", [
       name,
+      details,
       date,
       location,
       slots,
