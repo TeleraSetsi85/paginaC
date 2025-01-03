@@ -4,8 +4,12 @@ import { logOut, getCourses, addCourse, updateCourse, deleteCourse } from "../ap
 
 const Admin = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setModalOpen] = useState(false);
+
+  // Estado para manejar cursos, modal, y datos del formulario
   const [courses, setCourses] = useState([]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [courseId, setCourseId] = useState(null);
   const [newEvent, setNewEvent] = useState({
     name: "",
     details: "",
@@ -15,9 +19,8 @@ const Admin = () => {
     price: 0,
     status: true,
   });
-  const [isEditing, setIsEditing] = useState(false); // Track whether we are editing an event
-  const [courseId, setCourseId] = useState(null); // To store the course ID when editing
 
+  // Manejo de inputs del formulario
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setNewEvent((prev) => ({ ...prev, [id]: value }));
@@ -27,6 +30,7 @@ const Admin = () => {
     setNewEvent((prev) => ({ ...prev, status: e.target.checked }));
   };
 
+  // Cerrar sesión
   const handleLogOut = async () => {
     try {
       const response = await logOut();
@@ -38,6 +42,7 @@ const Admin = () => {
     }
   };
 
+  // Obtener cursos
   const fetchCourses = async () => {
     try {
       const response = await getCourses();
@@ -47,6 +52,7 @@ const Admin = () => {
     }
   };
 
+  // Agregar o actualizar un curso
   const handleAddEvent = async () => {
     try {
       const response = isEditing ? await updateCourse(courseId, newEvent) : await addCourse(newEvent);
@@ -63,6 +69,7 @@ const Admin = () => {
     }
   };
 
+  // Borrar un curso
   const handleDeleteEvent = async (id) => {
     try {
       const response = await deleteCourse(id);
@@ -78,78 +85,52 @@ const Admin = () => {
     }
   };
 
+  // Editar un curso
   const handleEditEvent = (course) => {
-    // Asegúrate de que la fecha esté en el formato adecuado para 'datetime-local'
-    const formattedDate = new Date(course.date).toISOString().slice(0, 16); // Formato adecuado: 'YYYY-MM-DDTHH:MM'
-
-    // Establecer el evento para editar con todos los detalles correctos
+    const formattedDate = new Date(course.date).toISOString().slice(0, 16);
     setNewEvent({
       name: course.name,
       details: course.details,
       date: formattedDate,
       location: course.location,
       slots: course.slots,
-      price: course.price_slot, // Asegúrate de que este es el nombre correcto en el servidor
+      price: course.price_slot,
       status: course.status,
     });
-
-    // Guardar el ID del curso para futuras actualizaciones
     setCourseId(course.id);
-
-    // Cambiar el estado a 'true' para indicar que estamos editando un evento
     setIsEditing(true);
-
     setModalOpen(true);
   };
 
+  // Efecto para cargar cursos al iniciar
   useEffect(() => {
     fetchCourses();
   }, []);
 
   return (
     <div className="admin-container">
+      {/* Encabezado */}
       <header className="bg-dark text-white py-3 text-center">
         <h1>Administrador de Eventos</h1>
         <button onClick={handleLogOut} className="btn btn-danger mt-2">
           Cerrar sesión
         </button>
+        <button
+          className="nav-link btn btn-link text-white"
+          onClick={() => {
+            setIsEditing(false);
+            setModalOpen(true);
+          }}
+        >
+          Agregar Evento
+        </button>
       </header>
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <button
-                  className="nav-link btn btn-link text-white"
-                  onClick={() => {
-                    setIsEditing(false);
-                    setModalOpen(true);
-                  }}
-                >
-                  Agregar Evento
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+      {/* Lista de eventos */}
       <main className="container my-4">
         {courses.length > 0 ? (
           courses.map((course) => (
-            <div key={course.id} className={`card my-3 shadow-sm`}>
+            <div key={course.id} className="card my-3 shadow-sm">
               <div className="card-body">
                 <h5 className="card-title">{course.name}</h5>
                 <p className="card-text">{course.details}</p>
@@ -174,6 +155,7 @@ const Admin = () => {
                   <button className="btn btn-warning" onClick={() => handleEditEvent(course)}>
                     Editar
                   </button>
+                  <button className="btn btn-primary">Detalles</button>
                   <button className="btn btn-danger" onClick={() => handleDeleteEvent(course.id)}>
                     Borrar
                   </button>
@@ -186,59 +168,37 @@ const Admin = () => {
         )}
       </main>
 
+      {/* Modal */}
       {isModalOpen && (
-        <>
+        <div className="modal-container">
           <div className="modal-overlay" onClick={() => setModalOpen(false)}></div>
-          <div className="modal show d-block" tabIndex="-1">
+          <div className="modal show d-block">
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">{isEditing ? "Editar Evento" : "Registra tu Evento"}</h5>
-                  <button type="button" className="btn-close" aria-label="Cerrar modal" onClick={() => setModalOpen(false)}></button>
+                  <button type="button" className="btn-close" onClick={() => setModalOpen(false)}></button>
                 </div>
                 <div className="modal-body">
-                  <div className="mb-3">
-                    <label htmlFor="name" className="form-label">
-                      Nombre del Evento
+                  {["name", "details", "date", "location", "slots", "price"].map((field) => (
+                    <div key={field} className="mb-3">
+                      <label htmlFor={field} className="form-label">
+                        {field === "slots" ? "Número de Boletos Disponibles" : field === "price" ? "Precio por Lugar" : `Nombre del ${field}`}
+                      </label>
+                      <input
+                        id={field}
+                        type={field === "slots" || field === "price" ? "number" : "text"}
+                        className="form-control"
+                        value={newEvent[field]}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  ))}
+                  <div className="form-check">
+                    <input type="checkbox" className="form-check-input" id="status" checked={newEvent.status} onChange={handleStatusChange} />
+                    <label className="form-check-label" htmlFor="status">
+                      {newEvent.status ? "Activo" : "Inactivo"}
                     </label>
-                    <input id="name" type="text" className="form-control" value={newEvent.name} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="details" className="form-label">
-                      Descripción del Evento
-                    </label>
-                    <input id="details" type="text" className="form-control" value={newEvent.details} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="date" className="form-label">
-                      Fecha del Evento
-                    </label>
-                    <input id="date" type="datetime-local" className="form-control" value={newEvent.date} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="location" className="form-label">
-                      Ubicación del Evento
-                    </label>
-                    <input id="location" type="text" className="form-control" value={newEvent.location} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="slots" className="form-label">
-                      Número de Boletos Disponibles
-                    </label>
-                    <input id="slots" type="number" className="form-control" value={newEvent.slots} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="price" className="form-label">
-                      Precio por Lugar
-                    </label>
-                    <input id="price" type="number" className="form-control" value={newEvent.price} onChange={handleInputChange} required />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="status" className="form-label">
-                      Estado
-                    </label>
-                    <input id="status" type="checkbox" className="form-check-input" checked={newEvent.status} onChange={handleStatusChange} />
-                    <span className="ms-2">{newEvent.status ? "Activo" : "Inactivo"}</span>
                   </div>
                 </div>
                 <div className="modal-footer">
@@ -252,7 +212,7 @@ const Admin = () => {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
