@@ -188,13 +188,14 @@ const Admin = () => {
                       </label>
                       <input
                         id={field}
-                        type={field === "slots" || field === "price" ? "number" : "text"}
+                        type={field === "slots" || field === "price" ? "number" : field === "date" ? "datetime-local" : "text"}
                         className="form-control"
-                        value={newEvent[field]}
+                        value={field === "date" ? (newEvent[field] ? new Date(newEvent[field]).toISOString().slice(0, 16) : "") : newEvent[field]}
                         onChange={handleInputChange}
                       />
                     </div>
                   ))}
+
                   <div className="form-check">
                     <input type="checkbox" className="form-check-input" id="status" checked={newEvent.status} onChange={handleStatusChange} />
                     <label className="form-check-label" htmlFor="status">

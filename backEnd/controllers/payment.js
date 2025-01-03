@@ -147,8 +147,6 @@ export const captureOrder = async (req, res) => {
         fs.unlink(qrImagePath, (err) => {
           if (err) {
             console.error("Error al eliminar el archivo QR:", err.message);
-          } else {
-            console.log("Archivo QR eliminado exitosamente.");
           }
         });
 

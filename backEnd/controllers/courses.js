@@ -227,7 +227,8 @@ export const getClientInfo = async (UUID) => {
         r.client_name, 
         r.client_lastname, 
         r.date,
-        c.name AS course_name
+        c.name AS course_name,
+        c.id AS course_id
       FROM reservations r
       JOIN courses c ON r.course_id = c.id
       WHERE r.id = ?`,
