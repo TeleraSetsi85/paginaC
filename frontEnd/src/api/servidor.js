@@ -12,3 +12,4 @@ export const deleteCourse = async (UUID) => apiAxios.delete(`/admin/courses/${UU
 
 // Cliente
 export const getActiveCourses = async () => await apiAxios.get("/courses");
+export const createOrder = async (UUID, form) => await apiAxios.post(`/payment/create-order/${UUID}`, form);

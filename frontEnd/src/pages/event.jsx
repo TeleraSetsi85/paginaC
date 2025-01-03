@@ -38,16 +38,19 @@ function Event() {
             <section key={index} className="row mb-4">
               <div className="col-md-6 offset-md-3 card shadow-sm p-4">
                 <h3 className="card-title text-center">{course.name}</h3>
-                <img
-                  src={course.image || "/img/default-event.jpg"}
-                  alt="photo-event"
-                  className="card-img-top mb-3"
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
-                <p className="text-center mb-1">Fecha: {course.date || "N/A"}</p>
-                <p className="text-center mb-3">Hora: {course.time || "N/A"}</p>
-                <p className="card-text">{course.description || "Sin descripción"}</p>
-                <p className="fw-bold text-center">Costo: ${course.cost || "0.00"}</p>
+                <p className="text-center mb-1">
+                  Fecha:{" "}
+                  {new Date(course.date).toLocaleString("es-MX", {
+                    timeZone: "America/Mexico_City",
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+                <p className="card-text">{course.details || "Sin descripción"}</p>
+                <p className="fw-bold text-center">Costo: ${course.price_slot}</p>
                 <div className="d-grid">
                   <button onClick={openModal} className="btn btn-primary">
                     Comprar ahora

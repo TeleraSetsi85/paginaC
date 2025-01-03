@@ -145,6 +145,7 @@ const Admin = () => {
                     minute: "2-digit",
                   })}
                 </p>
+                <p className="card-text">Ubicación: {course.location}</p>
                 <p className="card-text">Lugares: {course.slots}</p>
                 <p className="card-text">Precio: ${course.price_slot} MXN</p>
                 <p className="card-text">

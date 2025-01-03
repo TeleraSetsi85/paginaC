@@ -22,7 +22,16 @@ export const getCourses = async (req, res) => {
 // Obtiene todos los cursos activos (Cliente)
 export const getActiveCourses = async (req, res) => {
   try {
-    const [response] = await pool.query("SELECT * FROM courses WHERE status = 1");
+    const [response] = await pool.query(`
+      SELECT c.* 
+      FROM courses c
+      LEFT JOIN (
+        SELECT course_id, COUNT(*) AS reserved_slots
+        FROM reservations
+        GROUP BY course_id
+      ) r ON c.id = r.course_id
+      WHERE c.status = 1 AND (c.slots > COALESCE(r.reserved_slots, 0))
+    `);
 
     res.status(200).json({
       message: "Exito",
