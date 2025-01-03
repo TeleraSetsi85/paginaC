@@ -3,12 +3,14 @@ import { ADMIN_PASSWORD, ADMIN_USER } from "../config.js";
 // Permite iniciar sesión
 export const login = (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { user, password } = req.body;
 
-    if (username === ADMIN_USER && password === ADMIN_PASSWORD) {
-      req.session.user = { username };
+    if (user === ADMIN_USER && password === ADMIN_PASSWORD) {
+      req.session.user = user;
+
       return res.status(200).json({
         message: "Sesión iniciada correctamente",
+        body: user,
       });
     } else {
       return res.status(401).json({

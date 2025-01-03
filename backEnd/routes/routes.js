@@ -21,10 +21,10 @@ export const pool = createPool({
 /* Administrador */
 
 // Inicia sesión
-router.post("/admin", login);
+router.post("/auth", login);
 
 // Cierra sesión
-router.post("/admin/logout", checkAuth, logOut);
+router.get("/admin/logout", checkAuth, logOut);
 
 // Obtener todos los cursos de la DB
 router.get("/admin/courses", checkAuth, getCourses);

@@ -6,7 +6,7 @@ function Header() {
   const navigate = useNavigate();
 
   const btnChangeLife = () => {
-    navigate("/event");
+    navigate("/events");
   };
   return (
     <div>

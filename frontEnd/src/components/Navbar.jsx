@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   const btnAdmin = () => {
-    navigate("/admin");
+    navigate("/auth");
   };
 
   return (
@@ -57,7 +57,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <button className="nav-link text-white goldenButton" onClick={btnAdmin}>
-                  Admin
+                  Iniciar sesión
                 </button>
               </li>
             </ul>

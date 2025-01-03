@@ -1,74 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 // Componentes
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
-// Ejemplo de llamada al servidor
-import { main } from "../api/servidor";
-import { useNavigate } from "react-router-dom"; 
-
-function Home() {
-  //Solo para visualizar la pagina de admin, pero no se usara para esto, ignoralo, se cambiara por url
-  const [showLoginModal, setShowLoginModal] = useState(false); // Estado para controlar el modal
-  const [username, setUsername] = useState(""); // Usuario
-  const [password, setPassword] = useState(""); // Contraseña
-  const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
-
-  const navigate = useNavigate();
-  
-  //usuario y contraseña temporales
-  const validUsername = "autor";
-  const validPassword = "1234";
-
-  const handleLogin = () => {
-    if (username === validUsername && password === validPassword) {
-      setShowLoginModal(false); // Cierra el modal
-      navigate('/admin'); 
-    } else {
-      setErrorMessage('Datos incorrectos, intentelo de nuevo');
-    }
-  };
-
-  return (
-    <div>
-      {/*Para abrir el modal */}
-      <div>
-        <button className="btn btn-primary" onClick={() => setShowLoginModal(true)}>Admin</button>
-      </div>
-      {/* Modal para el login */}
-      {showLoginModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Inicio de Sesión</h2>
-            <input
-              type="text"
-              placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="form-control mb-2"
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-control mb-2"
-            />
-            <button className="btn btn-success me-2" onClick={handleLogin}>Ingresar</button>
-
-            <button className="btn btn-secondary" onClick={() => setShowLoginModal(false)}>Salir</button>
-
-            {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-
 
 function Home() {
   return (
@@ -145,7 +80,7 @@ function Home() {
         <h1 className="text-gold fw-bold">¿Qué puedo ofrecerte?</h1>
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
-            <div className="card">
+            <div className="card h-100">
               <img src="https://via.placeholder.com/300" className="card-img-top" alt="Motivación Personalizada" />
               <div className="card-body">
                 <h2 className="card-title">Motivación Personalizada</h2>
@@ -155,7 +90,7 @@ function Home() {
           </div>
 
           <div className="col-12 col-md-4 mb-4">
-            <div className="card">
+            <div className="card h-100">
               <img src="/img/photo-course 1.jpg" className="card-img-top" alt="Herramientas Prácticas" />
               <div className="card-body">
                 <h2 className="card-title">Herramientas Prácticas</h2>
@@ -167,7 +102,7 @@ function Home() {
           </div>
 
           <div className="col-12 col-md-4 mb-4">
-            <div className="card">
+            <div className="card h-100">
               <img src="/img/desarrolloPhoto.jpeg" className="card-img-top" alt="Desarrollo Personal" />
               <div className="card-body">
                 <h2 className="card-title">Desarrollo Personal</h2>
@@ -221,4 +156,3 @@ function Home() {
 }
 
 export default Home;
-
