@@ -73,8 +73,8 @@ const Admin = () => {
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Modal para la cancelación
         swalWithBootstrapButtons.fire({
-          title: "Cancelled",
-          text: "You are still logged in :)",
+          title: "Cancelado",
+          text: "Se cancelo con exito",
           icon: "error"
         });
       }
@@ -147,6 +147,17 @@ const Admin = () => {
     fetchCourses();
   }, []);
 
+  const btnDetails = ()=>{
+    let div = document.getElementById('divDetails');
+    div.innerHTML = `
+    <div>
+      <header>Usuarios registrados</header>
+      
+    <button>Ocultar</button>
+    </div>
+    `;
+  }
+
   return (
     <div className="admin-container">
       {/* Encabezado */}
@@ -196,7 +207,7 @@ const Admin = () => {
                   <button className="btn btn-warning" onClick={() => handleEditEvent(course)}>
                     Editar
                   </button>
-                  <button className="btn btn-primary">Detalles</button>
+                  <button className="btn btn-primary" onClick={btnDetails}>Detalles</button>
                   <button className="btn btn-danger" onClick={() => handleDeleteEvent(course.id)}>
                     Borrar
                   </button>
@@ -256,6 +267,10 @@ const Admin = () => {
           </div>
         </div>
       )}
+      {/*Detalles boton */}
+      <div id="divDetails">
+
+      </div>
     </div>
   );
 };
