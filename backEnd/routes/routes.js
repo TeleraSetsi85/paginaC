@@ -18,6 +18,8 @@ export const pool = createPool({
   queueLimit: 0,
 });
 
+console.log();
+
 /* Administrador */
 
 // Inicia sesión

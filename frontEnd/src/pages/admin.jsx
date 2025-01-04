@@ -32,15 +32,55 @@ const Admin = () => {
 
   // Cerrar sesión
   const handleLogOut = async () => {
-    try {
-      const response = await logOut();
-      if (response.status === 200) {
-        navigate("/");
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+  
+    // Mostrar el modal de confirmación
+    swalWithBootstrapButtons.fire({
+      title: "¿Estas seguro?",
+      text: "Estas apunto de cerrar sesion",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Cerrar Sesion",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await logOut();
+          if (response.status === 200) {
+            swalWithBootstrapButtons.fire({
+              title: "Has cerrado sesion",
+              text: "Se cerro la sesion con exito",
+              icon: "success"
+            });
+            navigate("/");
+          }
+        } catch (error) {
+          // Manejar errores al cerrar sesión
+          console.error("Error logging out:", error);
+          swalWithBootstrapButtons.fire({
+            title: "Error",
+            text: "There was a problem logging out.",
+            icon: "error"
+          });
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Modal para la cancelación
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "You are still logged in :)",
+          icon: "error"
+        });
       }
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
+    });
   };
+  
 
   // Obtener cursos
   const fetchCourses = async () => {

@@ -7,7 +7,9 @@ import "./index.css";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
-import Event from "./pages/Event";
+import Event from "./pages/event";
+import Err from "./pages/errMesa";
+import GoodMesa from "./pages/goodMesa";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -17,6 +19,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/auth" element={<Auth />} />
         <Route path="/dashboard" element={<Admin />} />
         <Route path="/events" element={<Event />} />
+        <Route path="/notPay" element={<Err />} />
+        <Route path="/Pay" element={<GoodMesa />} />
       </Routes>
     </Router>
   </StrictMode>

@@ -75,13 +75,13 @@ function Event() {
                   <form>
                     <div className="mb-3">
                       <label htmlFor="name" className="form-label">
-                        Nombre Completo
+                        Nombres
                       </label>
                       <input id="name" type="text" className="form-control" placeholder="Ingresa nombre completo" />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="email" className="form-label">
-                        Correo Electrónico
+                        Apellidos
                       </label>
                       <input id="email" type="email" className="form-control" placeholder="ejemplo@gmail.com" />
                     </div>
