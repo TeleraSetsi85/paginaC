@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { createRoot } from 'react-dom/client'; 
 import { useNavigate } from "react-router-dom";
 import { logOut, getCourses, addCourse, updateCourse, deleteCourse } from "../api/servidor";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid } from '@mui/x-data-grid';
+
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -155,8 +157,8 @@ const Admin = () => {
     let div = document.getElementById('divDetails');
     div.innerHTML = `
     <div>
-      <button id="btnHide">Ocultar</button>
       <div id="dataTable"></div>
+      <button id="btnHide">Ocultar</button>
     </div>
     `;
 
@@ -193,15 +195,15 @@ const Admin = () => {
     }));
 
     // Renderizar la tabla con DataGrid
-    const dataTable = document.getElementById('dataTable');
-    ReactDOM.render(
-      <ThemeProvider theme={createTheme()}>
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
-        </div>
-      </ThemeProvider>,
-      dataTable
-    );
+    const root = createRoot(dataTable);
+
+  root.render(
+    <ThemeProvider theme={createTheme()}>
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+      </div>
+    </ThemeProvider>
+  );
 
     // Evento para ocultar los detalles
     document.getElementById('btnHide').addEventListener('click', () => {
