@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { logOut, getCourses, addCourse, updateCourse, deleteCourse } from "../api/servidor";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { DataGrid } from '@mui/x-data-grid';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -147,15 +149,64 @@ const Admin = () => {
     fetchCourses();
   }, []);
 
+  
+  //Boton para detalles
   const btnDetails = ()=>{
     let div = document.getElementById('divDetails');
     div.innerHTML = `
     <div>
-      <header>Usuarios registrados</header>
-      
-    <button>Ocultar</button>
+      <button id="btnHide">Ocultar</button>
+      <div id="dataTable"></div>
     </div>
     `;
+
+
+      // Columnas de la tabla
+    const columns = [
+      { field: 'id', headerName: 'ID', width: 90 },
+      { field: 'name', headerName: 'Nombre', width: 150 },
+      { field: 'details', headerName: 'Detalles', width: 200 },
+      { field: 'date', headerName: 'Fecha', width: 150 },
+      { field: 'location', headerName: 'Ubicación', width: 150 },
+      { field: 'slots', headerName: 'Lugares', width: 110 },
+      { field: 'price', headerName: 'Precio', width: 110 },
+      { field: 'status', headerName: 'Estado', width: 110 },
+    ];
+
+    // Filas de la tabla
+    const rows = courses.map((course, index) => ({
+      id: index + 1,
+      name: course.name,
+      details: course.details,
+      date: new Date(course.date).toLocaleString("es-MX", {
+        timeZone: "America/Mexico_City",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      location: course.location,
+      slots: course.slots,
+      price: course.price_slot,
+      status: course.status ? "Activo" : "Inactivo",
+    }));
+
+    // Renderizar la tabla con DataGrid
+    const dataTable = document.getElementById('dataTable');
+    ReactDOM.render(
+      <ThemeProvider theme={createTheme()}>
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+        </div>
+      </ThemeProvider>,
+      dataTable
+    );
+
+    // Evento para ocultar los detalles
+    document.getElementById('btnHide').addEventListener('click', () => {
+      div.innerHTML = '';
+    });
   }
 
   return (
