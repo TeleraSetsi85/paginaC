@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getActiveCourses } from "../api/servidor";
+import Swal from "sweetalert2";
+import { getActiveCourses, createOrder } from "../api/servidor";
 
 function Event() {
   const [courses, setCourses] = useState([]);
@@ -18,17 +19,67 @@ function Event() {
     fetchCourses();
   }, []);
 
+  const handleBuyNow = (UUID) => {
+    Swal.fire({
+      title: "Comprar Boletos",
+      html: `
+        <form id="buy-tickets-form">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombres</label>
+            <input id="name" type="text" class="form-control" placeholder="Ingresa nombre completo" />
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input id="lastName" type="text" class="form-control" placeholder="Ingresa apellidos" />
+          </div>
+        </form>
+        <p>Método de pago: PayPal</p>
+      `,
+      confirmButtonText: "Realizar pago",
+      showCancelButton: true,
+      cancelButtonText: "Cerrar",
+      preConfirm: () => {
+        const name = document.getElementById("name").value;
+        const lastname = document.getElementById("lastName").value;
+
+        if (!name || !lastname) {
+          Swal.showValidationMessage("Por favor, completa todos los campos.");
+          return false;
+        }
+
+        return { name, lastname, payment: "PayPal" };
+      },
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Procesando",
+          text: "Por favor, espera mientras procesamos tu orden...",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        try {
+          const { data } = await createOrder(UUID, result.value);
+          Swal.close();
+          window.location.href = data.link.href;
+        } catch (error) {
+          Swal.fire("Error", "Ocurrió un problema al procesar tu orden. Intenta nuevamente.", "error");
+          console.error("Error al crear la orden:", error);
+        }
+      }
+    });
+  };
+
   return (
     <>
       <header className="bg-dark text-white py-3 text-center">
         <h1>Próximos Eventos</h1>
-        <button onClick={btnBack} className="btn btn-primary" id="back">
-          Volver atras
-        </button>
       </header>
 
       <nav className="bg-light py-2 text-center">
-        <span className="text-muted">Para acceder a los eventos, haz click en "Comprar ahora"</span>
+        <span className="text-muted">Para acceder a los eventos, haz clic en "Comprar ahora"</span>
       </nav>
 
       <main className="container my-5">
@@ -51,7 +102,7 @@ function Event() {
                 <p className="card-text">{course.details || "Sin descripción"}</p>
                 <p className="fw-bold text-center">Costo: ${course.price_slot}</p>
                 <div className="d-grid">
-                  <button onClick={openModal} className="btn btn-primary">
+                  <button onClick={() => handleBuyNow(course.id)} className="btn btn-primary">
                     Comprar ahora
                   </button>
                 </div>
@@ -60,57 +111,6 @@ function Event() {
           ))
         ) : (
           <p className="text-center text-white">No hay eventos disponibles.</p>
-        )}
-
-        {isModalOpen && (
-          <div className="modal fade show d-block" tabIndex="-1" aria-hidden="true">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Comprar Boletos</h5>
-                  <button type="button" className="btn-close" onClick={closeModal}></button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    <div className="mb-3">
-                      <label htmlFor="name" className="form-label">
-                        Nombres
-                      </label>
-                      <input id="name" type="text" className="form-control" placeholder="Ingresa nombre completo" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="email" className="form-label">
-                        Apellidos
-                      </label>
-                      <input id="email" type="email" className="form-control" placeholder="ejemplo@gmail.com" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="quantity" className="form-label">
-                        Cantidad de boletos
-                      </label>
-                      <input id="quantity" type="number" className="form-control" min="1" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="payment" className="form-label">
-                        Método de pago
-                      </label>
-                      <select id="payment" className="form-select">
-                        <option value="credit-card">Tarjeta de crédito</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="bank-transfer">Transferencia bancaria</option>
-                      </select>
-                    </div>
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button className="btn btn-secondary" onClick={closeModal}>
-                    Cerrar
-                  </button>
-                  <button className="btn btn-primary pay-button">Realizar pago</button>
-                </div>
-              </div>
-            </div>
-          </div>
         )}
       </main>
     </>
