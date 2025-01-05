@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getActiveCourses } from "../api/servidor";
+import "./styles/events.css"
 
 function Event() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -52,7 +53,7 @@ function Event() {
                 <p className="card-text">{course.details || "Sin descripción"}</p>
                 <p className="fw-bold text-center">Costo: ${course.price_slot}</p>
                 <div className="d-grid">
-                  <button onClick={openModal} className="btn btn-primary">
+                  <button onClick={openModal} className="btn btn-primary" id="comprar">
                     Comprar ahora
                   </button>
                 </div>
@@ -68,7 +69,7 @@ function Event() {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Comprar Boletos</h5>
+                  <h5 className="modal-title golden">Comprar Boletos</h5>
                   <button type="button" className="btn-close" onClick={closeModal}></button>
                 </div>
                 <div className="modal-body">

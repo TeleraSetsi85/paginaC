@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
+#comprar{
+    background-color: #daa520;
+    border: black;
+    color: black;
+}
+
+#comprar:hover{
+    transition: 0.2s;
+    background-color: #daa520c1;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
