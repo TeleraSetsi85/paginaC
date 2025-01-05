@@ -15,13 +15,24 @@
     background-color: #daa520c1;
 }
 
+#back{
+    background-color: #daa520;
+    border: black;
+    color: black;
+}
+
+#back:hover{
+    transition: 0.2s;
+    background-color: #daa520c1;
+}
+
 /* Establecer la transición para la aparición del modal */
 .modal.fade {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-  /* Animación cuando el modal está abierto */
+/* Animación cuando el modal está abierto */
 .modal.show {
     opacity: 1;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getActiveCourses } from "../api/servidor";
+import { useNavigate } from "react-router-dom";
 import "./styles/events.css"
 
 function Event() {
@@ -23,14 +24,22 @@ function Event() {
     fetchCourses();
   }, []);
 
+  //Boton de volver atras
+  const navigate = useNavigate();
+
+  const btnBack = ()=>{
+    navigate('/');
+  }
+
   return (
     <>
       <header className="bg-dark text-white py-3 text-center">
         <h1>Próximos Eventos</h1>
+        <button onClick={btnBack}  className="btn btn-primary" id="back">Volver atras</button>
       </header>
 
       <nav className="bg-light py-2 text-center">
-        <span className="text-muted">Para acceder a los eventos, haz clic en "Comprar ahora"</span>
+        <span className="text-muted">Para acceder a los eventos, haz click en "Comprar ahora"</span>
       </nav>
 
       <main className="container my-5">
@@ -64,57 +73,56 @@ function Event() {
           <p className="text-center text-white">No hay eventos disponibles.</p>
         )}
 
-{isModalOpen && (
-  <div className="modal fade show d-block" tabIndex="-1" aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered modal-lg">
-      <div className="modal-content border-0 shadow-lg rounded">
-        <div className="modal-header bg-dark text-white">
-          <h5 className="modal-title">Comprar Boletos</h5>
-          <button type="button" className="btn-close" onClick={closeModal} aria-label="Cerrar"></button>
+      {isModalOpen && (
+        <div className="modal fade show d-block" tabIndex="-1" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-content border-0 shadow-lg rounded">
+              <div className="modal-header bg-dark text-white">
+                <h5 className="modal-title">Comprar Boletos</h5>
+                <button type="button" className="btn-close" onClick={closeModal} aria-label="Cerrar"></button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="mb-4">
+                    <label htmlFor="name" className="form-label fw-bold">
+                      Nombres
+                    </label>
+                    <input id="name" type="text" className="form-control form-control-lg" placeholder="Ingresa nombre completo" />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="email" className="form-label fw-bold">
+                      Apellidos
+                    </label>
+                    <input id="email" type="email" className="form-control form-control-lg" placeholder="ejemplo@gmail.com" />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="quantity" className="form-label fw-bold">
+                      Cantidad de boletos
+                    </label>
+                    <input id="quantity" type="number" className="form-control form-control-lg" min="1" />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="payment" className="form-label fw-bold">
+                      Método de pago
+                    </label>
+                    <select id="payment" className="form-select form-select-lg">
+                      <option value="credit-card">Tarjeta de crédito</option>
+                      <option value="paypal">PayPal</option>
+                      <option value="bank-transfer">Transferencia bancaria</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={closeModal}>
+                  Cerrar
+                </button>
+                <button className="btn btn-primary pay-button">Realizar pago</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="modal-body">
-          <form>
-            <div className="mb-4">
-              <label htmlFor="name" className="form-label fw-bold">
-                Nombres
-              </label>
-              <input id="name" type="text" className="form-control form-control-lg" placeholder="Ingresa nombre completo" />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="form-label fw-bold">
-                Apellidos
-              </label>
-              <input id="email" type="email" className="form-control form-control-lg" placeholder="ejemplo@gmail.com" />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="quantity" className="form-label fw-bold">
-                Cantidad de boletos
-              </label>
-              <input id="quantity" type="number" className="form-control form-control-lg" min="1" />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="payment" className="form-label fw-bold">
-                Método de pago
-              </label>
-              <select id="payment" className="form-select form-select-lg">
-                <option value="credit-card">Tarjeta de crédito</option>
-                <option value="paypal">PayPal</option>
-                <option value="bank-transfer">Transferencia bancaria</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={closeModal}>
-            Cerrar
-          </button>
-          <button className="btn btn-primary pay-button">Realizar pago</button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-
+      )}
       </main>
     </>
   );
