@@ -22,6 +22,11 @@ export const getCourses = async (req, res) => {
 // Obtiene todos los cursos activos (Cliente)
 export const getActiveCourses = async (req, res) => {
   try {
+    await pool.query(`
+        DELETE FROM reservations
+        WHERE payment_ID IS NULL;
+      `);
+
     const [response] = await pool.query(`
       SELECT c.* 
       FROM courses c

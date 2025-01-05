@@ -6,6 +6,8 @@ import { deleteCourse, getActiveCourses, getCourses, getCourseUsersInfo, setCour
 import { cancelOrder, captureOrder, checkTicket, createOrder } from "../controllers/payment.js";
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from "../config.js";
 
+import bcrypt from "bcryptjs";
+
 export const router = Router();
 export const pool = createPool({
   host: DB_HOST,

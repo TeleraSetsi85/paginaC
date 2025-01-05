@@ -11,9 +11,10 @@ export const login = async (req, res) => {
       });
     }
 
-    const isMatch = await bcrypt.compare(password, ADMIN_PASSWORD);
+    const isUser = await bcrypt.compare(user, ADMIN_USER);
+    const isPassword = await bcrypt.compare(password, ADMIN_PASSWORD);
 
-    if (user === ADMIN_USER && isMatch) {
+    if (isUser && isPassword) {
       req.session.user = user;
 
       return res.status(200).json({

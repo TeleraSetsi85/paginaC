@@ -52,8 +52,8 @@ const getOrder = async (UUID, { name, lastname }) => {
     ],
 
     application_context: {
-      return_url: URI + "/payment/capture-order/?UUID=" + userId,
-      cancel_url: URI + "/payment/cancel-Payment/?UUID=" + userId,
+      return_url: ORIGIN + "/payment/capture-order/?UUID=" + userId,
+      cancel_url: ORIGIN + "/payment/cancel-Payment/?UUID=" + userId,
       shipping_preference: "NO_SHIPPING",
       user_action: "PAY_NOW",
       brand_name: "Lexo Salmon",
@@ -126,11 +126,15 @@ export const captureOrder = async (req, res) => {
           username: PAYPAL_API_CLIENT,
           password: PAYPAL_API_SECRET,
         },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       }
     );
 
     const payment_ID = response.data.purchase_units[0].payments.captures[0].id;
-    confirmClient(UUID, payment_ID);
+    await confirmClient(UUID, payment_ID); // Asegúrate de que confirmClient sea una función asincrónica si es necesario
 
     const doc = new PDFDocument();
     const chunks = [];
@@ -139,21 +143,27 @@ export const captureOrder = async (req, res) => {
       doc,
       UUID,
       (chunk) => chunks.push(chunk),
-      () => {
-        const pdfBuffer = Buffer.concat(chunks);
-        const base64Pdf = `data:application/pdf;base64,${pdfBuffer.toString("base64")}`;
-        const qrImagePath = "./src/tmp/temp_qr.png";
+      async () => {
+        try {
+          const pdfBuffer = Buffer.concat(chunks);
+          const base64Pdf = `data:application/pdf;base64,${pdfBuffer.toString("base64")}`;
+          const qrImagePath = "./src/tmp/temp_qr.png";
 
-        fs.unlink(qrImagePath, (err) => {
-          if (err) {
+          // Elimina el archivo QR si ya no es necesario
+          await fs.promises.unlink(qrImagePath).catch((err) => {
             console.error("Error al eliminar el archivo QR:", err.message);
-          }
-        });
+          });
 
-        res.status(200).json({
-          message: "Ticket generado correctamente",
-          pdf: base64Pdf,
-        });
+          res.status(200).json({
+            message: "Ticket generado correctamente",
+            pdf: base64Pdf,
+          });
+        } catch (error) {
+          res.status(500).json({
+            message: "Error al generar el ticket",
+            error: error.message,
+          });
+        }
       },
       (error) => {
         res.status(500).json({
@@ -163,7 +173,7 @@ export const captureOrder = async (req, res) => {
       }
     );
   } catch (error) {
-    const message = "Error al intentar capturar la orden de pago: " + error;
+    const message = "Error al intentar capturar la orden de pago: " + error.message;
     console.log(message);
     res.status(500).json({
       message: message,
@@ -173,7 +183,7 @@ export const captureOrder = async (req, res) => {
 
 const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallback) => {
   try {
-    const [userData] = await getClientInfo(UUID);
+    const userData = await getClientInfo(UUID);
     const [showData] = await getCourseInfo(userData.course_id);
     const userURL = ORIGIN + "/checkUser/" + UUID;
 
