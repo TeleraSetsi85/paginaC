@@ -4,46 +4,35 @@
     box-sizing: border-box;
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#comprar{
+    background-color: #daa520;
+    border: black;
+    color: black;
 }
 
-dialog {
-    background: white;
-    border: none;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    max-width: 90%;
+#comprar:hover{
+    transition: 0.2s;
+    background-color: #daa520c1;
 }
 
-.close-button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+#back{
+    background-color: #daa520;
+    border: black;
+    color: black;
 }
 
-.pay-button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+#back:hover{
+    transition: 0.2s;
+    background-color: #daa520c1;
 }
 
-.pay-button:hover {
-    background: #0056b3;
+/* Establecer la transición para la aparición del modal */
+.modal.fade {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Animación cuando el modal está abierto */
+.modal.show {
+    opacity: 1;
 }
