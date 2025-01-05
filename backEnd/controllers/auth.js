@@ -1,11 +1,19 @@
 import { ADMIN_PASSWORD, ADMIN_USER } from "../config.js";
+import bcrypt from "bcryptjs";
 
-// Permite iniciar sesión
-export const login = (req, res) => {
+export const login = async (req, res) => {
   try {
     const { user, password } = req.body;
 
-    if (user === ADMIN_USER && password === ADMIN_PASSWORD) {
+    if (!ADMIN_PASSWORD || !ADMIN_USER) {
+      return res.status(500).json({
+        message: "Error en la configuración del administrador.",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, ADMIN_PASSWORD);
+
+    if (user === ADMIN_USER && isMatch) {
       req.session.user = user;
 
       return res.status(200).json({
@@ -18,10 +26,10 @@ export const login = (req, res) => {
       });
     }
   } catch (error) {
-    const message = "Error al intentar iniciar sesión: " + error;
-    console.log(message);
+    console.error("Error al intentar iniciar sesión:", error.message);
     res.status(500).json({
-      message: message,
+      message: "Error interno del servidor.",
+      details: error.message,
     });
   }
 };

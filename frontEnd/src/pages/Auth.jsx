@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // Función de API
 import { auth } from "../api/servidor";
 
 function Auth() {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({ user: "l3x0S4lmOn1424", password: "PonerUnaContraseñaHasheada" });
+  const [userInfo, setUserInfo] = useState({ user: "", password: "" });
 
   const returnHome = () => navigate("/");
 
@@ -25,11 +26,33 @@ function Auth() {
         const response = await auth(userInfo);
         if (response.status === 200) {
           sessionStorage.setItem("LSuser", JSON.stringify(response.data.body));
+          Swal.fire({
+            icon: "success",
+            title: "Sesión iniciada correctamente",
+            text: "Bienvenido al sistema",
+          });
           navigate("/dashboard");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error al iniciar sesión",
+            text: "Credenciales incorrectas, por favor verifica.",
+          });
         }
       } catch (error) {
         console.error("Error al iniciar sesión:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error en el servidor",
+          text: "Hubo un problema al intentar iniciar sesión. Intenta más tarde.",
+        });
       }
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Campos vacíos",
+        text: "Por favor, llena todos los campos.",
+      });
     }
   };
 

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import session from "express-session";
 import { router } from "./routes/routes.js";
-import { DB_DATABASE, DB_HOST, ORIGIN, PORT, SECRET } from "./config.js";
+import { ORIGIN, PORT, SECRET } from "./config.js";
 
 const app = express();
 

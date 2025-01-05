@@ -231,11 +231,12 @@ export const getClientInfo = async (UUID) => {
         c.id AS course_id
       FROM reservations r
       JOIN courses c ON r.course_id = c.id
-      WHERE r.id = ?`,
+      WHERE r.id = ?
+    `,
       [UUID]
     );
 
-    return response;
+    return response.length > 0 ? response[0] : null;
   } catch (error) {
     throw new Error("Error al intentar confirmar cliente: " + error.message);
   }

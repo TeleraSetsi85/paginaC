@@ -1,4 +1,4 @@
-import { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config.js";
+import { ORIGIN, PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET, URI } from "../config.js";
 import axios from "axios";
 import fs from "fs";
 import PDFDocument from "pdfkit";
@@ -175,7 +175,7 @@ const generateTicket = async (doc, UUID, dataCallback, endCallback, errorCallbac
   try {
     const [userData] = await getClientInfo(UUID);
     const [showData] = await getCourseInfo(userData.course_id);
-    const userURL = URI + "/checkUser/" + UUID;
+    const userURL = ORIGIN + "/checkUser/" + UUID;
 
     const formattedDate = new Date(showData.date).toLocaleString("es-MX", {
       day: "numeric",
@@ -242,10 +242,10 @@ export const checkTicket = async (req, res) => {
   try {
     const { UUID } = req.params;
 
-    const [response] = await getClientInfo(UUID);
+    const response = await getClientInfo(UUID);
 
     res.status(200).json({
-      message: "Verificación correcta",
+      message: "Resultados de busqueda",
       body: response,
     });
   } catch (error) {

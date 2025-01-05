@@ -14,3 +14,4 @@ export const getUsersInfo = async (UUID) => apiAxios.get(`/admin/courses/${UUID}
 // Cliente
 export const getActiveCourses = async () => await apiAxios.get("/courses");
 export const createOrder = async (UUID, form) => await apiAxios.post(`/payment/create-order/${UUID}`, form);
+export const checkTicket = async (UUID) => await apiAxios.get(`/checkUser/${UUID}`);

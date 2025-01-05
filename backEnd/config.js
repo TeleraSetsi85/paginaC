@@ -16,7 +16,7 @@ export const DB_DATABASE = process.env.DB_DATABASE;
 export const DB_PORT = process.env.DB_PORT;
 
 export const ADMIN_USER = process.env.USER;
-export const ADMIN_PASSWORD = process.env.PASSWORD;
+export const ADMIN_PASSWORD = "$2a$10$vUbfdBQRPZmUyVsNH9WGS.A1nE3Nhz3p/9cOvg.immaQxzhBtt526";
 
 export const PAYPAL_API_SECRET = process.env.PAYPAL_API_SECRET;
 export const PAYPAL_API_CLIENT = process.env.PAYPAL_API_CLIENT;

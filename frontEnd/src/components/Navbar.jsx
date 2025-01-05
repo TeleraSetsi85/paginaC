@@ -1,19 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const navigate = useNavigate();
-
   const btnHome = () => {
     document.getElementById("section-header")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const btnAboutOf = () => {
     document.getElementById("who-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
-  const btnAdmin = () => {
-    navigate("/auth");
   };
 
   return (
@@ -53,11 +46,6 @@ function Navbar() {
               <li className="nav-item">
                 <button className="nav-link text-white navbarButton" data-bs-toggle="modal" data-bs-target="#contacto-pop">
                   Contacto
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="nav-link text-white goldenButton" onClick={btnAdmin}>
-                  Iniciar sesión
                 </button>
               </li>
             </ul>
