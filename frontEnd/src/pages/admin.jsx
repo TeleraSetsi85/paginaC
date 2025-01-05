@@ -247,26 +247,31 @@ const Admin = () => {
         {
           field: "date",
           headerName: "Fecha",
-          width: 150,
-          valueFormatter: ({ value }) =>
-            new Date(value).toLocaleString("es-MX", {
+          width: 250,
+        },
+        { field: "paymentId", headerName: "Pago", width: 200 },
+      ];
+
+      const rows = usersInfo.map((user, index) => {
+        const parsedDate = Date.parse(user.date);
+        const validDate = isNaN(parsedDate)
+          ? null
+          : new Date(parsedDate).toLocaleString("es-MX", {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",
               hour: "2-digit",
               minute: "2-digit",
-            }),
-        },
-        { field: "paymentId", headerName: "Pago", width: 200 },
-      ];
+            });
 
-      const rows = usersInfo.map((user, index) => ({
-        id: index + 1,
-        name: user.client_name,
-        lastname: user.client_lastname,
-        date: user.date,
-        paymentId: user.payment_ID,
-      }));
+        return {
+          id: index + 1,
+          name: user.client_name,
+          lastname: user.client_lastname,
+          date: validDate,
+          paymentId: user.payment_ID,
+        };
+      });
 
       // Crea un contenedor para renderizar DataGrid
       const swalContainer = document.createElement("div");
