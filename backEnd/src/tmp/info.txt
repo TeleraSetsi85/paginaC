@@ -1,0 +1,1 @@
+Attention: Please avoid deleting the "tmp" folder, as its absence may cause the system to crash.
