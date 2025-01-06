@@ -17,7 +17,7 @@ function Home() {
             <p>Con la cual descubrirás tu propósito, juntos transformaremos tu vida.</p>
           </div>
           <div className="col-md-6 text-center">
-            <img src="https://via.placeholder.com/300" alt="photo" className="img-fluid rounded" />
+            <img src="/img/photo7.jpg" alt="photo" className="img-fluid rounded" />
           </div>
         </div>
 
@@ -81,7 +81,7 @@ function Home() {
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
             <div className="card h-100">
-              <img src="https://via.placeholder.com/300" className="card-img-top" alt="Motivación Personalizada" />
+              <img src="/img/photo8.jpg" className="card-img-top" alt="Motivación Personalizada" />
               <div className="card-body">
                 <h2 className="card-title">Motivación Personalizada</h2>
                 <p className="card-text text-white">Te inspiraré a alcanzar tus objetivos, sin importar cuán grandes o pequeños sean.</p>
