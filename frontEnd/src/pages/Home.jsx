@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import AOS from 'aos';
 
 // Componentes
 import Navbar from "../components/Navbar";
@@ -6,12 +8,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Home() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); // Vuelve a inicializar AOS al montar el componente
+  }, []);
   return (
     <div className="masterContainer">
       <Navbar />
       <Header />
       <main className="container">
-        <div className="row align-items-center mb-0">
+        <div className="row align-items-center mb-0" data-aos="fade-down">
           <div className="col-md-6">
             <h3 className="text-gold fw-bold">Descubre la grandeza</h3>
             <p>Con la cual descubrirás tu propósito, juntos transformaremos tu vida.</p>
@@ -21,7 +26,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="row align-items-center mb-0">
+        <div className="row align-items-center mb-0" data-aos="zoom-in-right">
           <div className="col-md-6 order-md-2">
             <h3 className="text-gold fw-bold">Vive una vida más plena y satisfactoria</h3>
             <p>¡Contáctame para emprender este viaje juntos!</p>
@@ -32,7 +37,7 @@ function Home() {
         </div>
       </main>
 
-      <section className="container" id="who-section">
+      <section className="container" id="who-section" data-aos="slide-up">
         <h1 className="text-gold fw-bold">¿Quién es Lexo Salmon?</h1>
         <div className="row align-items-center">
           <div className="col-md-4">
@@ -80,7 +85,7 @@ function Home() {
         <h1 className="text-gold fw-bold">¿Qué puedo ofrecerte?</h1>
         <div className="row">
           <div className="col-12 col-md-4 mb-4">
-            <div className="card h-100">
+            <div className="card h-100" data-aos="zoom-in">
               <img src="/img/photo8.jpg" className="card-img-top" alt="Motivación Personalizada" />
               <div className="card-body">
                 <h2 className="card-title">Motivación Personalizada</h2>
@@ -90,7 +95,7 @@ function Home() {
           </div>
 
           <div className="col-12 col-md-4 mb-4">
-            <div className="card h-100">
+            <div className="card h-100" data-aos="zoom-in">
               <img src="/img/photo-course 1.jpg" className="card-img-top" alt="Herramientas Prácticas" />
               <div className="card-body">
                 <h2 className="card-title">Herramientas Prácticas</h2>
@@ -102,7 +107,7 @@ function Home() {
           </div>
 
           <div className="col-12 col-md-4 mb-4">
-            <div className="card h-100">
+            <div className="card h-100" data-aos="zoom-in">
               <img src="/img/desarrolloPhoto.jpeg" className="card-img-top" alt="Desarrollo Personal" />
               <div className="card-body">
                 <h2 className="card-title">Desarrollo Personal</h2>

@@ -75,14 +75,14 @@ function Event() {
   return (
     <>
       <header className="bg-dark text-white py-3 text-center">
-        <h1>Próximos Eventos</h1>
+        <h1 data-aos="fade-down">Próximos Eventos</h1>
       </header>
 
       <nav className="bg-light py-2 text-center">
         <span className="text-muted">Para acceder a los eventos, haz clic en "Comprar ahora"</span>
       </nav>
 
-      <main className="container my-5">
+      <main className="container my-5" data-aos="zoom-in">
         {courses.length > 0 ? (
           courses.map((course, index) => (
             <section key={index} className="row mb-4">

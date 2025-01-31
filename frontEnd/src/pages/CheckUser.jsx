@@ -34,16 +34,16 @@ function CheckUser() {
     <div style={{ padding: "20px" }}>
       {userInfo ? (
         <div>
-          <h2>User Information</h2>
+          <h2>Informacion del usuario</h2>
           <pre>{JSON.stringify(userInfo, null, 2)}</pre>
         </div>
       ) : (
         <div>
-          <h2>No user found</h2>
+          <h2>Usuario no encontrado</h2>
         </div>
       )}
       <button onClick={handleBack} style={{ marginTop: "20px" }}>
-        Back to Home
+        Regresar a inicio
       </button>
     </div>
   );
